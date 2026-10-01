@@ -11,7 +11,7 @@ const eur = new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR" 
 const money = (cents) => eur.format(cents / 100);
 
 async function api(path, options = {}) {
-  const res = await fetch(API_BASE + path, { ...options, headers: { Accept: "application/json", ...options.headers } });
+  const res = await fetch(API_BASE ? `${API_BASE}/${path}` : path, { ...options, headers: { Accept: "application/json", ...options.headers } });
   let body = null;
   try {
     body = await res.json();
@@ -149,7 +149,7 @@ let siteInfo = null;
 async function initSite() {
   $("#year").textContent = new Date().getFullYear();
   try {
-    siteInfo = await api("/api/site");
+    siteInfo = await api("api/site");
   } catch (err) {
     console.warn("Seitendaten nicht geladen, statische Inhalte bleiben:", err.message);
     return;
@@ -186,7 +186,7 @@ const FALLBACK_ITEMS = [
   { id: "schoko", name: "Schokoriegel", icon: "🍫" },
   { id: "apfel", name: "Äpfel 1 kg", icon: "🍎" },
 ];
-const productsPromise = api("/api/products").catch((err) => {
+const productsPromise = api("api/products").catch((err) => {
   console.warn("Demo-Artikel nicht geladen:", err.message);
   return null;
 });
@@ -529,7 +529,7 @@ function initContact() {
     submit.disabled = true;
     statusEl.textContent = "Wird gesendet …";
     try {
-      await api("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      await api("api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       statusEl.textContent = "";
       form.hidden = true;
       success.hidden = false;

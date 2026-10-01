@@ -1,0 +1,37 @@
+# D-Group Website – Apache-Einstellungen für IONOS (Linux-Webhosting)
+
+Options -Indexes
+DirectoryIndex index.html index.php
+
+# /api/<name> -> api/index.php?route=<name>
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^api/(health|site|products|contact)/?$ api/index.php?route=$1 [L,QSA]
+</IfModule>
+
+# Sicherheits-Header (entsprechen server.js)
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Kompression und Browser-Cache
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 week"
+  ExpiresByType image/jpeg "access plus 1 week"
+  ExpiresByType image/svg+xml "access plus 1 week"
+  ExpiresByType text/css "access plus 1 day"
+  ExpiresByType text/javascript "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
+</IfModule>
+AddType font/woff2 .woff2
+
+# Eigene Fehlerseite (nur aktivieren, wenn die Seite im Hauptverzeichnis der Domain liegt, nicht in einem Unterordner)
+# ErrorDocument 404 /404.html

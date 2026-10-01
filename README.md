@@ -4,7 +4,7 @@ Neue Landingpage für **D-Group IT Solutions**: helles, warmes Design mit der Ma
 
 ```bash
 npm start          # http://localhost:3000
-npm test           # API- und Server-Tests
+npm test           # Tests für Node-Server und PHP-API
 npm run dev        # Neustart bei Änderungen am Server
 ```
 
@@ -18,7 +18,10 @@ public/index.html      Die Seite
 public/assets/css      Styles (Farben und Abstände als Variablen am Dateianfang)
 public/assets/js       Verhalten: Demo-Kasse, PDA-Demo, Formular, Animationen
 public/assets/fonts    Outfit + Inter, lokal eingebunden (kein Google-Fonts-Aufruf, DSGVO-freundlich)
-test/api.test.js       Tests für API, Validierung, Rate-Limit, Sicherheit
+ionos/                 PHP-Variante der API + .htaccess für klassisches Webhosting (IONOS)
+scripts/build-ionos.mjs  Baut das Upload-Paket dist/d-group-ionos.zip
+test/api.test.js       Tests für den Node-Server (API, Validierung, Rate-Limit, Sicherheit)
+test/php-api.test.js   Dieselben Regeln für die PHP-API (übersprungen, wenn PHP fehlt)
 ```
 
 ## API
@@ -53,8 +56,26 @@ Jede Anfrage wird als eine Zeile JSON in `data/requests.jsonl` gespeichert (steh
 
 ## Betrieb
 
-- **Mit Node.js-Hosting** (VPS, Render, Fly.io, Railway …): Repo ausrollen, `npm start`, ggf. hinter einen Reverse Proxy (HTTPS) setzen und `TRUST_PROXY=1` setzen.
-- **Klassisches Webhosting (z. B. Strato-Webspace)**: Dort läuft in der Regel kein Node.js (bitte im Tarif prüfen). Dann den Ordner `public/` hochladen und die API separat hosten. In `public/index.html` die Basis-URL im Tag `<meta name="dgroup-api" content="https://api.example.de">` eintragen, auf dem API-Server `ALLOWED_ORIGIN=https://ihre-domain.de` setzen und in der Content-Security-Policy des Webservers die API-Domain unter `connect-src` erlauben. Ohne erreichbare API bleibt die Seite vollständig lesbar; nur Formular und Demo-Artikel benötigen sie.
+### A) IONOS / klassisches Webhosting (PHP)
+
+```bash
+npm run build:ionos     # erzeugt dist/d-group-ionos.zip
+```
+
+1. ZIP entpacken und den **Inhalt** (nicht den Ordner) per FTP/SFTP oder im IONOS „Webspace Explorer“ in das Hauptverzeichnis der Domain hochladen – oder zum Ausprobieren in einen Unterordner wie `test/`. Versteckte Dateien (`.htaccess`) müssen mit hochgeladen werden.
+2. Aufrufen: `https://ihre-domain.de/` (bzw. `/test/`). Funktioniert die API, zeigt `https://ihre-domain.de/api/health` `{"status":"ok",…}`.
+3. Optional E-Mail bei neuen Anfragen: in `api-data/config.php` `notifyEmail` (und möglichst `mailFrom` mit einer Adresse Ihrer Domain) eintragen.
+4. Gespeicherte Anfragen stehen in `api-data/requests.php` (per FTP öffnen; die Datei ist von außen nicht abrufbar). Das Verzeichnis `api-data/` muss für PHP beschreibbar sein.
+
+Voraussetzungen: Linux-Tarif mit PHP ≥ 7.4 und aktivierter `.htaccess`/mod_rewrite. Eigene 404-Seite: Zeile `ErrorDocument` in der `.htaccess` aktivieren, wenn die Seite im Hauptverzeichnis liegt. Zeigt die Seite hinter einem Proxy immer dieselbe Besucher-IP, `trustProxy` in `config.php` prüfen.
+
+### B) Mit Node.js-Hosting (VPS, Render, Fly.io, Railway …)
+
+Repo ausrollen, `npm start`, ggf. hinter einen Reverse Proxy (HTTPS) setzen und `TRUST_PROXY=1` setzen.
+
+### C) Statische Seite und API getrennt
+
+Den Ordner `public/` hochladen und die API woanders hosten. In `public/index.html` die Basis-URL im Tag `<meta name="dgroup-api" content="https://api.example.de">` eintragen, auf dem API-Server `ALLOWED_ORIGIN=https://ihre-domain.de` setzen und in der Content-Security-Policy des Webservers die API-Domain unter `connect-src` erlauben. Ohne erreichbare API bleibt die Seite lesbar; nur Formular und Demo-Artikel benötigen sie.
 
 ## Vor dem Livegang prüfen
 
