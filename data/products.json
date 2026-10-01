@@ -1,0 +1,25 @@
+{
+  "currency": "EUR",
+  "note": "Demo-Artikel für die interaktive Kassen-Vorschau. Preise sind Bruttopreise, Pfand wird separat ausgewiesen.",
+  "categories": [
+    { "id": "alle", "name": "Alle Artikel" },
+    { "id": "getraenke", "name": "Getränke" },
+    { "id": "backwaren", "name": "Backwaren" },
+    { "id": "obst", "name": "Obst" },
+    { "id": "snacks", "name": "Snacks" },
+    { "id": "haushalt", "name": "Haushalt" }
+  ],
+  "items": [
+    { "id": "wasser", "name": "Mineralwasser 1 L", "icon": "💧", "category": "getraenke", "price": 0.89, "vat": 19, "deposit": 0.25 },
+    { "id": "cola", "name": "Cola 0,5 L", "icon": "🥤", "category": "getraenke", "price": 1.49, "vat": 19, "deposit": 0.25 },
+    { "id": "saft", "name": "Apfelsaft 1 L", "icon": "🧃", "category": "getraenke", "price": 1.79, "vat": 19, "deposit": 0.25 },
+    { "id": "broetchen", "name": "Brötchen", "icon": "🥐", "category": "backwaren", "price": 0.45, "vat": 7 },
+    { "id": "vollkornbrot", "name": "Vollkornbrot", "icon": "🍞", "category": "backwaren", "price": 2.49, "vat": 7 },
+    { "id": "banane", "name": "Banane", "icon": "🍌", "category": "obst", "price": 0.39, "vat": 7 },
+    { "id": "apfel", "name": "Äpfel 1 kg", "icon": "🍎", "category": "obst", "price": 2.99, "vat": 7 },
+    { "id": "schoko", "name": "Schokoriegel", "icon": "🍫", "category": "snacks", "price": 1.29, "vat": 7 },
+    { "id": "chips", "name": "Chips 150 g", "icon": "🥔", "category": "snacks", "price": 1.99, "vat": 7 },
+    { "id": "reiniger", "name": "Haushaltsreiniger", "icon": "🧴", "category": "haushalt", "price": 2.79, "vat": 19 },
+    { "id": "spuelmittel", "name": "Spülmittel", "icon": "🧼", "category": "haushalt", "price": 1.59, "vat": 19 }
+  ]
+}

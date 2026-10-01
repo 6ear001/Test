@@ -1,0 +1,17 @@
+{
+  "name": "D-Group IT Solutions",
+  "tagline": "Kasse · Warenwirtschaft · Cloud",
+  "announcement": {
+    "lead": "Alles verbunden.",
+    "text": "Kasse, Warenwirtschaft & Buchhaltung."
+  },
+  "contact": {
+    "email": "",
+    "phone": ""
+  },
+  "packages": {
+    "kasse": { "price": null },
+    "kasse-pda": { "price": null },
+    "komplett": { "price": null }
+  }
+}
