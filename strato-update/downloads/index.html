@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Downloads – D-Group IT Solutions</title>
+<meta name="description" content="Treiber, Tools und Updates zum Herunterladen für Kunden von D-Group IT Solutions." />
+<meta name="theme-color" content="#101112" />
+<link rel="canonical" href="https://d-group-it-solutions.de/downloads/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="D-Group IT Solutions" />
+<meta property="og:locale" content="de_DE" />
+<meta property="og:title" content="Downloads – D-Group IT Solutions" />
+<meta property="og:description" content="Treiber, Tools und Updates zum Herunterladen für Kunden von D-Group IT Solutions." />
+<meta property="og:url" content="https://d-group-it-solutions.de/downloads/" />
+<meta property="og:image" content="https://d-group-it-solutions.de/assets/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png" />
+<link rel="alternate" hreflang="de" href="https://d-group-it-solutions.de/downloads/" />
+<link rel="alternate" hreflang="ar" href="https://d-group-it-solutions.de/ar/downloads/" />
+<link rel="alternate" hreflang="x-default" href="https://d-group-it-solutions.de/downloads/" />
+<link rel="stylesheet" href="/assets/app.css?v=20261002-1" />
+<link rel="stylesheet" href="/assets/site.css?v=20261002-1" />
+<link rel="stylesheet" href="/assets/experience.css?v=20261002-1" />
+</head>
+<body>
+<div class="site" lang="de" dir="ltr">
+<div id="site-header" data-active="downloads"></div>
+
+<main class="site-main">
+<section class="s-wrap">
+    <span class="s-eyebrow">Downloads</span>
+    <h2>Treiber, Tools &amp; Updates</h2>
+    <p class="s-lead">
+        Basis-Downloads für <span data-field="SiteName">D-Group IT Solutions</span>. Bei Fragen zur passenden Datei einfach
+        <a href="/kontakt/">Kontakt aufnehmen</a>.
+    </p>
+
+    <div class="s-cycle-toggle" role="group" aria-label="Download-Kategorie" id="dl-filter">
+        <button type="button" class="s-cycle-btn active" aria-pressed="true" data-cat="">Alle</button>
+        <button type="button" class="s-cycle-btn" aria-pressed="false" data-cat="Applications">Programme</button>
+        <button type="button" class="s-cycle-btn" aria-pressed="false" data-cat="Updates">Updates</button>
+        <button type="button" class="s-cycle-btn" aria-pressed="false" data-cat="Cloud">Cloud</button>
+    </div>
+
+    <p class="s-lead" id="dl-empty" style="display:none">In dieser Kategorie stehen aktuell keine Downloads bereit.</p>
+    <div class="s-download-list" id="dl-skeleton" aria-hidden="true">
+        <div class="skeleton-download"><div class="skeleton"></div><div class="skeleton-download-body"><div class="skeleton"></div><div class="skeleton"></div></div><div class="skeleton"></div></div>
+        <div class="skeleton-download"><div class="skeleton"></div><div class="skeleton-download-body"><div class="skeleton"></div><div class="skeleton"></div></div><div class="skeleton"></div></div>
+        <div class="skeleton-download"><div class="skeleton"></div><div class="skeleton-download-body"><div class="skeleton"></div><div class="skeleton"></div></div><div class="skeleton"></div></div>
+    </div>
+    <div class="s-download-list" id="dl-table" style="display:none">
+        <div id="dl-rows"></div>
+    </div>
+</section>
+</main>
+
+<div id="site-footer"></div>
+</div>
+
+<script src="/assets/site-chrome.js?v=20261002-1"></script>
+<script src="/assets/experience.js?v=20261002-1"></script>
+<script src="/assets/site-data.js?v=20261002-1"></script>
+<script>
+var ALL_ITEMS = [];
+var CURRENT_FILTER = "";
+
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+}
+
+function render() {
+    var filtered = CURRENT_FILTER ? ALL_ITEMS.filter(function (f) { return f.category === CURRENT_FILTER; }) : ALL_ITEMS;
+    document.getElementById("dl-skeleton").style.display = "none";
+
+    if (filtered.length === 0) {
+        document.getElementById("dl-empty").style.display = "";
+        document.getElementById("dl-table").style.display = "none";
+        return;
+    }
+    document.getElementById("dl-empty").style.display = "none";
+    document.getElementById("dl-table").style.display = "";
+
+    document.getElementById("dl-rows").innerHTML = filtered.map(function (f, i) {
+        return '' +
+            '<div class="s-download-card">' +
+            '<span class="s-download-num">' + (i + 1) + '</span>' +
+            '<div class="s-download-body">' +
+            '<div class="s-download-name">' + escapeHtml(f.name) + '</div>' +
+            '<div class="s-download-desc">' + escapeHtml(f.description || "") + '</div>' +
+            '</div>' +
+            '<a class="btn btn-primary btn-sm" href="' + SiteData.downloadFileUrl(f.id) + '">Herunterladen</a>' +
+            '</div>';
+    }).join("");
+}
+
+document.querySelectorAll("#dl-filter [data-cat]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+        document.querySelectorAll("#dl-filter [data-cat]").forEach(function (b) { b.classList.remove("active"); b.setAttribute("aria-pressed", "false"); });
+        btn.classList.add("active");
+        btn.setAttribute("aria-pressed", "true");
+        CURRENT_FILTER = btn.getAttribute("data-cat");
+        render();
+    });
+});
+
+SiteData.loadSiteInfo().then(function (s) { SiteData.applyCommon(s); }).catch(function (e) { console.error(e); });
+SiteData.loadDownloads().then(function (items) {
+    ALL_ITEMS = items;
+    render();
+}).catch(function (e) {
+    console.error("Downloads konnten nicht geladen werden", e);
+    document.getElementById("dl-skeleton").style.display = "none";
+    document.getElementById("dl-empty").style.display = "";
+});
+</script>
+</body>
+</html>

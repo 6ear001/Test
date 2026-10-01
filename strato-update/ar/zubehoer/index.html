@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>الأجهزة والملحقات – D-Group IT Solutions</title>
+<meta name="description" content="أجهزة الكاشير وأجهزة PDA والملحقات لنقطة البيع لديك – عند الرغبة مُجهّزة ومن مصدر واحد." />
+<meta name="theme-color" content="#101112" />
+<link rel="canonical" href="https://d-group-it-solutions.de/ar/zubehoer/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="D-Group IT Solutions" />
+<meta property="og:locale" content="ar_AR" />
+<meta property="og:title" content="الأجهزة والملحقات – D-Group IT Solutions" />
+<meta property="og:description" content="أجهزة الكاشير وأجهزة PDA والملحقات لنقطة البيع لديك – عند الرغبة مُجهّزة ومن مصدر واحد." />
+<meta property="og:url" content="https://d-group-it-solutions.de/ar/zubehoer/" />
+<meta property="og:image" content="https://d-group-it-solutions.de/assets/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png" />
+<link rel="alternate" hreflang="de" href="https://d-group-it-solutions.de/zubehoer/" />
+<link rel="alternate" hreflang="ar" href="https://d-group-it-solutions.de/ar/zubehoer/" />
+<link rel="alternate" hreflang="x-default" href="https://d-group-it-solutions.de/zubehoer/" />
+<link rel="stylesheet" href="/assets/app.css?v=20261002-1" />
+<link rel="stylesheet" href="/assets/site.css?v=20261002-1" />
+<link rel="stylesheet" href="/assets/experience.css?v=20261002-1" />
+</head>
+<body>
+<div class="site" lang="ar" dir="rtl">
+<div id="site-header" data-active="zubehoer"></div>
+
+<main class="site-main">
+<section class="s-wrap">
+    <span class="s-eyebrow">الأجهزة</span>
+    <h2>أجهزة الكاشير والملحقات</h2>
+    <p class="s-lead">
+        جهاز الكاشير وماسح PDA المحمول والملحقات – إما عبرنا أو توفرها بشكل
+        مستقل. لعرض سعر فردي، تواصل معنا مباشرة.
+    </p>
+
+    <p class="s-lead" id="hw-empty" style="display:none">لا توجد حاليًا منتجات أجهزة مُدرجة. تواصل معنا مباشرة.</p>
+    <div class="s-hw-grid" id="hw-skeleton" aria-hidden="true">
+        <article class="s-price-card hardware-product-card"><div class="skeleton skeleton-hw-image"></div><div class="skeleton-hw-body"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></article>
+        <article class="s-price-card hardware-product-card"><div class="skeleton skeleton-hw-image"></div><div class="skeleton-hw-body"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></article>
+        <article class="s-price-card hardware-product-card"><div class="skeleton skeleton-hw-image"></div><div class="skeleton-hw-body"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></article>
+    </div>
+    <div class="s-hw-grid" id="hw-grid"></div>
+</section>
+
+<section class="s-alt">
+    <div class="s-wrap s-center">
+        <h2>تجهيزات فردية؟</h2>
+        <p class="s-lead">يسعدنا تجميع باقة مناسبة لنقطة البيع الخاصة بك.</p>
+        <a class="btn btn-primary btn-lg" href="/ar/kontakt/">تواصل معنا</a>
+    </div>
+</section>
+</main>
+
+<div id="site-footer"></div>
+</div>
+
+<script src="/assets/site-chrome.js?v=20261002-1"></script>
+<script src="/assets/experience.js?v=20261002-1"></script>
+<script src="/assets/site-data.js?v=20261002-1"></script>
+<script>
+var CATEGORY_LABEL = { Terminal: "جهاز الكاشير", Pda: "جهاز PDA", Zubehoer: "ملحقات" };
+var PACKAGE_ICON = '<svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 7v10l8 4 8-4V7Z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg>';
+
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+}
+
+function renderHardware(items) {
+    document.getElementById("hw-skeleton").style.display = "none";
+    if (!items.length) {
+        document.getElementById("hw-empty").style.display = "";
+        return;
+    }
+    var grid = document.getElementById("hw-grid");
+    grid.innerHTML = items.map(function (p) {
+        var image = p.hasImage
+            ? '<div class="s-hw-image"><img src="' + SiteData.hardwareImageUrl(p.id) + '" alt="' + escapeHtml(p.name) + '" loading="lazy" /></div>'
+            : '<div class="s-hw-image placeholder"><span>' + PACKAGE_ICON + '</span></div>';
+        var price = p.priceGross != null
+            ? '<div class="amount">' + SiteData.euro(p.priceGross).replace(" €", "") + ' <small>€ شامل الضريبة</small></div>'
+            : '<div class="amount on-request">السعر عند الطلب</div>';
+        var features = "";
+        if (p.features) {
+            features = "<ul>" + p.features.split("\n").map(function (f) { return f.trim(); }).filter(Boolean)
+                .map(function (f) { return "<li>" + escapeHtml(f) + "</li>"; }).join("") + "</ul>";
+        }
+        var desc = p.description ? '<div class="sub">' + escapeHtml(p.description) + '</div>' : "";
+        return '' +
+            '<article class="s-price-card hardware-product-card">' + image +
+            '<div class="hardware-product-content">' +
+            '<div class="s-eyebrow hardware-category">' + (CATEGORY_LABEL[p.category] || escapeHtml(String(p.category).toUpperCase())) + '</div>' +
+            '<h3>' + escapeHtml(p.name) + '</h3>' + desc + price + features +
+            '<div class="cta-row"><a class="btn btn-primary" href="/ar/kontakt/?produkt=' + encodeURIComponent(p.name) + '">إرسال طلب</a></div>' +
+            '</div></article>';
+    }).join("");
+}
+
+SiteData.loadSiteInfo().then(function (s) { SiteData.applyCommon(s); }).catch(function (e) { console.error(e); });
+SiteData.loadHardware().then(renderHardware).catch(function (e) {
+    console.error("Hardware konnte nicht geladen werden", e);
+    document.getElementById("hw-skeleton").style.display = "none";
+    document.getElementById("hw-empty").style.display = "";
+});
+</script>
+</body>
+</html>

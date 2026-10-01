@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>تواصل معنا – D-Group IT Solutions</title>
+<meta name="description" content="استشارة مجانية حول الكاشير وPDA والأجهزة: أرسل لنا طلبك وسنتواصل معك." />
+<meta name="theme-color" content="#101112" />
+<link rel="canonical" href="https://d-group-it-solutions.de/ar/kontakt/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="D-Group IT Solutions" />
+<meta property="og:locale" content="ar_AR" />
+<meta property="og:title" content="تواصل معنا – D-Group IT Solutions" />
+<meta property="og:description" content="استشارة مجانية حول الكاشير وPDA والأجهزة: أرسل لنا طلبك وسنتواصل معك." />
+<meta property="og:url" content="https://d-group-it-solutions.de/ar/kontakt/" />
+<meta property="og:image" content="https://d-group-it-solutions.de/assets/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png" />
+<link rel="alternate" hreflang="de" href="https://d-group-it-solutions.de/kontakt/" />
+<link rel="alternate" hreflang="ar" href="https://d-group-it-solutions.de/ar/kontakt/" />
+<link rel="alternate" hreflang="x-default" href="https://d-group-it-solutions.de/kontakt/" />
+<link rel="stylesheet" href="/assets/app.css?v=20261002-1" />
+<link rel="stylesheet" href="/assets/site.css?v=20261002-1" />
+<link rel="stylesheet" href="/assets/experience.css?v=20261002-1" />
+</head>
+<body>
+<div class="site" lang="ar" dir="rtl">
+<div id="site-header" data-active="kontakt"></div>
+
+<main class="site-main">
+<section class="s-wrap">
+    <span class="s-eyebrow">تواصل معنا</span>
+    <h2>تواصل معنا</h2>
+    <p class="s-lead">
+        صف لنا باختصار عملك وما تحتاجه. سنتواصل معك قريبًا
+        بتقييم وعرض سعر.
+    </p>
+
+    <div id="k-error" class="alert alert-error" style="display:none"></div>
+    <div id="k-produkt" class="alert alert-ok" style="display:none">طلب بخصوص: <strong id="k-produkt-name"></strong></div>
+
+    <div class="contact-grid">
+        <form class="contact-card" id="kontakt-form" method="post">
+            <input type="hidden" name="produkt" id="k-produkt-input" value="" />
+            <input type="hidden" name="language" value="ar" />
+            <input type="hidden" name="returnOrigin" id="k-return-origin" value="" />
+            <div class="field">
+                <label for="k-name">الاسم *</label>
+                <input id="k-name" name="name" required maxlength="160" autocomplete="name" />
+            </div>
+            <div class="field">
+                <label for="k-company">الشركة</label>
+                <input id="k-company" name="company" maxlength="200" autocomplete="organization" />
+            </div>
+            <div class="field">
+                <label for="k-email">البريد الإلكتروني *</label>
+                <input id="k-email" name="email" type="email" required maxlength="256" autocomplete="email" />
+            </div>
+            <div class="field">
+                <label for="k-phone">الهاتف</label>
+                <input id="k-phone" name="phone" maxlength="64" autocomplete="tel" />
+            </div>
+            <div class="field">
+                <label for="k-count">عدد نقاط البيع</label>
+                <input id="k-count" name="registerCount" type="number" min="1" max="999" inputmode="numeric" />
+            </div>
+            <div class="field">
+                <label for="k-message">رسالتك</label>
+                <textarea id="k-message" name="message" maxlength="4000"
+                          placeholder="القطاع، عدد الفروع، نظام الكاشير الحالي، الإطار الزمني …"></textarea>
+            </div>
+
+            <div class="hp" aria-hidden="true">
+                <label for="k-website">الموقع الإلكتروني (يرجى تركه فارغًا)</label>
+                <input id="k-website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <button class="btn btn-primary" type="submit">إرسال الطلب</button>
+            <p class="form-hint">
+                بإرسال هذا النموذج، فإنك توافق على معالجة بياناتك
+                لغرض معالجة طلبك. التفاصيل في
+                <a href="/datenschutz/">سياسة الخصوصية</a> (بالألمانية).
+            </p>
+        </form>
+
+        <aside class="contact-aside">
+            <div class="contact-card">
+                <h3 style="margin-top:0">تواصل مباشر</h3>
+                <dl>
+                    <dt data-if="ContactEmail">البريد الإلكتروني</dt>
+                    <dd data-if="ContactEmail"><a data-field-href="ContactEmailHref" data-field="ContactEmail" href="#"></a></dd>
+                    <dd data-if-not="ContactEmail"><span class="legal"><span class="placeholder">[E-MAIL – im Control Panel unter „Website" hinterlegen]</span></span></dd>
+                    <dt data-if="ContactPhone">الهاتف</dt>
+                    <dd data-if="ContactPhone" data-field="ContactPhone"></dd>
+                    <dt data-if="ContactAddress">العنوان</dt>
+                    <dd data-if="ContactAddress" style="white-space:pre-line" data-field="ContactAddress"></dd>
+                </dl>
+            </div>
+        </aside>
+    </div>
+</section>
+</main>
+
+<div id="site-footer"></div>
+</div>
+
+<script src="/assets/site-chrome.js?v=20261002-1"></script>
+<script src="/assets/experience.js?v=20261002-1"></script>
+<script src="/assets/site-data.js?v=20261002-1"></script>
+<script>
+SiteData.loadSiteInfo().then(function (s) { SiteData.applyCommon(s); }).catch(function (e) { console.error(e); });
+
+var form = document.getElementById("kontakt-form");
+form.action = SiteData.contactActionUrl();
+document.getElementById("k-return-origin").value = window.location.origin;
+
+var params = new URLSearchParams(window.location.search);
+var produkt = params.get("produkt");
+if (produkt) {
+    document.getElementById("k-produkt-input").value = produkt;
+    document.getElementById("k-produkt-name").textContent = produkt;
+    document.getElementById("k-produkt").style.display = "";
+}
+var fehler = params.get("fehler");
+if (fehler) {
+    var messages = {
+        limit: "تم استلام عدة طلبات من جهتك بالفعل. يرجى المحاولة لاحقًا أو الاتصال بنا هاتفيًا.",
+        spam: "تم رفض رسالتك من قِبل فلتر البريد المزعج. يرجى صياغتها بدون روابط متعددة.",
+        eingabe: "يرجى التحقق من بياناتك – الاسم وبريد إلكتروني صالح مطلوبان.",
+    };
+    var box = document.getElementById("k-error");
+    box.textContent = messages[fehler] || messages.eingabe;
+    box.style.display = "";
+}
+</script>
+</body>
+</html>
