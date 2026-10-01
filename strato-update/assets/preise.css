@@ -1,0 +1,78 @@
+/* Preise im Kartenlook: Preise-Seite und Startseite (Deutsch + Arabisch).
+   Verwendet die Theme-Variablen der Seite (--s-*) und logische Eigenschaften, damit dir="rtl"
+   ohne eigene Regeln gespiegelt wird. Die Daten-Anbindung (data-field, data-cycle, data-if aus
+   site-data.js) bleibt unverändert: Preise kommen weiterhin live vom Server. */
+
+.pr-head { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+.pr-head .s-lead { margin-inline: auto; }
+.pr-cycle-wrap { display: flex; justify-content: center; margin-bottom: 56px; }
+
+/* Umschalter Monatlich / Quartalsweise / Jährlich (Markup und Skript unverändert) */
+.s-cycle-toggle.pr-cycle { display: inline-flex; gap: 4px; padding: 5px; margin-bottom: 0; background: var(--s-surface); border: 1px solid var(--s-line); border-radius: 999px; }
+.pr-cycle .s-cycle-btn { min-height: 44px; padding: 0 22px; border: 0; border-radius: 999px; background: transparent; color: var(--s-ink-soft); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; box-shadow: none; transition: background-color .2s, color .2s; }
+.pr-cycle .s-cycle-btn:hover { color: var(--s-ink); }
+.pr-cycle .s-cycle-btn.active { background: #d81f2a; color: #fff; }
+.s-cycle-toggle.pr-cycle.pr-cycle-left { margin-block: 8px 48px; }
+
+/* Raster */
+.pr-grid { display: grid; gap: 20px; align-items: stretch; }
+.pr-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pr-grid-2 { grid-template-columns: 1.1fr .9fr; }
+
+/* Karte */
+.pr-card { position: relative; display: flex; flex-direction: column; padding: 34px 30px 30px; background: var(--s-surface); border: 1px solid var(--s-line); border-radius: 20px; box-shadow: 0 26px 60px -38px #000; transition: transform .25s, border-color .25s, box-shadow .25s; }
+.pr-card:hover { transform: translateY(-4px); border-color: #4a4d52; }
+.pr-card h3 { margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -.02em; line-height: 1.15; color: var(--s-ink); }
+.pr-for { margin: 6px 0 0; font-size: 15px; color: var(--s-ink-soft); }
+
+.pr-featured { background: radial-gradient(ellipse at top right, rgba(255, 74, 67, .16), transparent 62%), #1b1b1d; border: 1.5px solid rgba(255, 74, 67, .6); box-shadow: 0 0 0 1px rgba(255, 74, 67, .12), 0 40px 80px -36px rgba(255, 74, 67, .5); }
+.pr-featured:hover { border-color: var(--s-accent); }
+.pr-grid-3 .pr-featured { transform: translateY(-14px); }
+.pr-grid-3 .pr-featured:hover { transform: translateY(-18px); }
+.pr-badge { position: absolute; top: -14px; inset-inline-start: 30px; padding: 6px 14px; border-radius: 999px; background: #d81f2a; color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .03em; box-shadow: 0 10px 22px -10px rgba(255, 74, 67, .8); }
+
+/* Preisblock */
+.pr-price { display: flex; flex-direction: column; gap: 6px; margin: 22px 0 24px; padding-block: 22px; border-block: 1px solid var(--s-line); min-height: 148px; }
+.pr-featured .pr-price { border-color: rgba(255, 255, 255, .12); }
+.pr-amount { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; }
+.pr-amount strong { direction: ltr; unicode-bidi: isolate; display: inline-block; font-size: clamp(36px, 3.4vw, 46px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; color: var(--s-ink); }
+.pr-amount small { font-size: 15px; color: var(--s-ink-soft); }
+.pr-text strong { direction: inherit; font-size: clamp(28px, 2.6vw, 34px); }
+.pr-net { margin: 0; font-size: 14px; line-height: 1.55; color: var(--s-ink-soft); }
+.pr-net strong { color: var(--s-ink); font-weight: 600; direction: ltr; unicode-bidi: isolate; display: inline-block; }
+.pr-net .dir-ltr, .pr-net [data-cycle-field], .pr-net [data-field] { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+.pr-pill { align-self: flex-start; display: inline-flex; padding: 5px 12px; border-radius: 999px; background: rgba(61, 220, 132, .12); border: 1px solid rgba(61, 220, 132, .3); color: #6fe9a6; font-size: 13px; font-weight: 700; line-height: 1.3; }
+.pr-pill:empty { display: none; }
+.pr-pill [data-field] { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+.pr-deal { display: flex; flex-direction: column; gap: 8px; }
+
+/* Listen */
+.pr-list { display: grid; align-content: start; gap: 12px; margin: 0 0 28px; padding: 0; list-style: none; flex: 1; }
+.pr-list li { position: relative; padding-inline-start: 30px; font-size: 15.5px; line-height: 1.5; color: var(--s-ink); }
+.pr-list li::before { content: ""; position: absolute; inset-inline-start: 0; top: .2em; width: 19px; height: 19px; background: #3ddc84;
+  -webkit-mask: var(--pr-check) center / contain no-repeat; mask: var(--pr-check) center / contain no-repeat; }
+.pr-list-no li { color: var(--s-ink-soft); }
+.pr-list-no li::before { background: var(--s-ink-muted); -webkit-mask-image: var(--pr-minus); mask-image: var(--pr-minus); }
+.pr-list strong { font-weight: 600; color: var(--s-ink); }
+.pr-card { --pr-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+  --pr-minus: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M6 12h12'/%3E%3C/svg%3E"); }
+
+.pr-btn { width: 100%; justify-content: center; }
+.site .pr-card .btn-ghost-dark { border-color: rgba(255, 255, 255, .35); }
+.pr-note { max-width: 760px; margin: 32px auto 0; text-align: center; }
+.pr-home-note { margin-top: 28px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .pr-grid-3, .pr-grid-2 { grid-template-columns: 1fr; max-width: 560px; margin-inline: auto; }
+  .pr-featured { order: -1; }
+  .pr-grid-3 .pr-featured, .pr-grid-3 .pr-featured:hover { transform: none; }
+  .pr-price { min-height: 0; }
+}
+@media (max-width: 600px) {
+  .pr-cycle-wrap { margin-bottom: 40px; }
+  .s-cycle-toggle.pr-cycle { display: flex; width: 100%; max-width: 560px; overflow: visible; }
+  .pr-cycle .s-cycle-btn { flex: 1; min-width: 0; padding: 0 6px; font-size: 14px; }
+  .pr-card { padding: 30px 22px 24px; }
+  .pr-badge { inset-inline-start: 22px; }
+}
