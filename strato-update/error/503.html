@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vielen Dank für Ihre Anfrage – D-Group IT Solutions</title>
-<meta name="theme-color" content="#101112" />
-<meta name="robots" content="noindex, follow" />
+<title>Fehler 503 – D-Group IT Solutions</title>
+<meta name="robots" content="noindex, nofollow" />
 <link rel="icon" type="image/png" sizes="512x512" href="/assets/logo-mark.png" />
 <link rel="stylesheet" href="/assets/app.css?v=20261003-1" />
 <link rel="stylesheet" href="/assets/site.css?v=20261003-1" />
@@ -14,17 +13,17 @@
 </head>
 <body>
 <div class="site" lang="de" dir="ltr">
-<div id="site-header" data-active="kontakt"></div>
+<div id="site-header"></div>
 
 <main class="site-main">
-<section class="thanks">
-    <div class="big"><svg class="uicon-big" viewBox="0 0 24 24" fill="none" stroke="#59da91" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10.2" stroke-width="1.6"/><path d="M7.5 12.5 10.5 15.5 16.5 9"/></svg></div>
-    <h2>Vielen Dank für Ihre Anfrage.</h2>
-    <p class="s-lead" style="margin: 8px auto 24px">
-        Ihre Nachricht ist bei uns eingegangen. Wir melden uns in der Regel
-        innerhalb eines Werktags bei Ihnen.
-    </p>
-    <a class="btn btn-primary" href="/">Zurück zur Startseite</a>
+<section class="s-wrap s-center error-page">
+    <span class="error-code">503</span>
+    <h2>Vorübergehend nicht verfügbar</h2>
+    <p class="s-lead">Der Dienst ist derzeit nicht erreichbar, meist wegen Wartungsarbeiten. Bitte versuchen Sie es später erneut.</p>
+    <div class="pd-actions" style="justify-content:center">
+        <a class="btn btn-primary btn-lg" href="/">Zur Startseite</a>
+        <a class="btn btn-ghost-dark btn-lg" href="/kontakt/">Kontakt aufnehmen</a>
+    </div>
 </section>
 </main>
 
@@ -32,7 +31,6 @@
 </div>
 
 <script src="/assets/site-chrome.js?v=20261003-1"></script>
-<script src="/assets/experience.js?v=20261003-1"></script>
 <script src="/assets/site-data.js?v=20261003-1"></script>
 <script>
 SiteData.loadSiteInfo().then(function (s) { SiteData.applyCommon(s); }).catch(function (e) { console.error(e); });

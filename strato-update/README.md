@@ -10,7 +10,16 @@ Alle Änderungen gegenüber der ursprünglichen Seite, in einem Paket. Kann übe
 `assets/preise.css`, `preise/`, `ar/preise/`, `index.html`, `ar/index.html`. Live-Preise bleiben über `api-site.php`.
 `assets/site-data.js`: Einheit und Spar-Hinweis des Umschalters richten sich nach `<html lang>`.
 
-## 3. Menü und Seitenordnung
+## 3. Menü, Kopf- und Fußzeile (neu gestaltet)
+- `assets/menu.css` (neu) und `assets/site-chrome.js`: Menü mit Überschriften und Kurzbeschreibungen.
+  Kopfzeile: **Kassensoftware** (Kasse & PDA, Funktionen, Live-Demo) und **Hardware & Service** (Hardware, Downloads, Kontakt)
+  als Aufklappfelder, dazu **Preise**, Sprachumschaltung und der auffällige Button "Beratung anfragen".
+  Handy-Menü mit denselben Überschriften, Fußzeile mit drei Spalten (Kassensoftware, Hardware & Service, Rechtliches).
+  Maus, Tastatur (Pfeiltasten, Esc) und Touch bedienbar; Deutsch und Arabisch (gespiegelt).
+- Alle Menüpunkte stehen in **einer** Liste (`MENU` oben in `site-chrome.js`). Neue Seite aufnehmen = eine Zeile in der passenden Gruppe.
+- Alle HTML-Seiten binden `menu.css` ein und tragen neue Versionsnummern (`?v=20261003-1`).
+
+## 3a. Seitenordnung
 - `assets/site-chrome.js`: Menü in der Reihenfolge des Kaufwegs (Kasse & PDA, Funktionen, Hardware, Preise, Downloads, Kontakt).
   Gilt für Kopfzeile, Handy-Menü und Fußzeile (DE + AR).
 - Startseite: "Für wen" mit TSE/DSFinV-K/GoBD/§ 146a-Siegeln steht jetzt direkt unter der Kurzübersicht,

@@ -1,0 +1,99 @@
+/* Menü, Kopfzeile und Fußzeile – gruppiert, gut lesbar, mit Kurzbeschreibungen (Deutsch + Arabisch).
+   Verwendet die Theme-Variablen der Seite (--s-*) und logische Eigenschaften, damit dir="rtl" ohne
+   eigene Regeln gespiegelt wird. Die Menüpunkte selbst stehen gesammelt in assets/site-chrome.js (MENU). */
+
+/* ---------- Ankündigungsleiste und Marke: besser lesbar ---------- */
+.site .site-announcement { font-size: 13px; letter-spacing: .01em; }
+.site .site-announcement a { display: inline-flex; align-items: center; gap: 6px; }
+.site .site-announcement a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.site .site-brand-copy strong { font-size: 17px; letter-spacing: -.01em; }
+.site .site-brand-copy small { font-size: 11.5px; color: var(--s-ink-soft); letter-spacing: .02em; }
+
+/* ---------- Desktop-Menü ---------- */
+.site .site-nav { gap: 4px; flex-wrap: nowrap; }
+.mn-group { position: relative; }
+.site .site-nav .mn-trigger,
+.site .site-nav .mn-link { position: relative; display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px; border: 0; border-radius: 12px; background: transparent; color: #d5d6d2; font: inherit; font-size: 15px; font-weight: 600; letter-spacing: .005em; cursor: pointer; transition: background-color .18s, color .18s; }
+.site .site-nav .mn-trigger:hover, .site .site-nav .mn-link:hover,
+.site .site-nav .mn-group.is-open .mn-trigger { background: rgba(255, 255, 255, .07); color: #fff; }
+.mn-trigger .mn-chev { width: 15px; height: 15px; transition: transform .2s; opacity: .8; }
+.mn-group.is-open .mn-trigger .mn-chev { transform: rotate(180deg); }
+/* Aktive Seite: roter Strich unter dem Menüpunkt bzw. der Gruppe */
+.site .site-nav .mn-trigger.is-active, .site .site-nav .mn-link.active { color: #fff; }
+.site .site-nav .mn-trigger.is-active::after, .site .site-nav .mn-link.active::after { content: ""; position: absolute; inset-inline: 14px; bottom: 5px; height: 2px; border-radius: 2px; background: var(--s-accent); }
+
+/* Aufklappfeld */
+.mn-panel { position: absolute; z-index: 40; top: calc(100% + 12px); inset-inline-start: -8px; width: 390px; padding: 10px; background: #17181a; border: 1px solid #34373c; border-radius: 18px; box-shadow: 0 34px 80px -24px #000, 0 0 0 1px rgba(255, 255, 255, .03); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .18s, transform .18s, visibility .18s; }
+.mn-panel.mn-end { inset-inline-start: auto; inset-inline-end: -8px; }
+.mn-panel::before { content: ""; position: absolute; inset-inline: 0; top: -14px; height: 14px; } /* Brücke, damit das Feld beim Hovern nicht zuklappt */
+.mn-group.is-open .mn-panel { opacity: 1; visibility: visible; transform: none; }
+.site .site-nav .mn-item { position: relative; display: flex; align-items: center; gap: 14px; padding: 12px; border-radius: 12px; color: var(--s-ink); font-size: inherit; transition: background-color .15s; }
+.site .site-nav .mn-item:hover, .site .site-nav .mn-item:focus-visible { background: #222427; color: var(--s-ink); }
+.site .site-nav .mn-item.active { background: rgba(255, 74, 67, .09); }
+.site .site-nav .mn-item.active::after { content: none; }
+.mn-ic { display: grid; place-items: center; flex: none; width: 42px; height: 42px; border-radius: 12px; background: var(--s-accent-soft); border: 1px solid rgba(255, 74, 67, .28); color: var(--s-accent); }
+.mn-ic .uicon { width: 21px; height: 21px; }
+.mn-tx { display: grid; gap: 2px; min-width: 0; }
+.mn-tx strong { font-size: 15.5px; font-weight: 600; line-height: 1.3; color: #fff; }
+.mn-tx small { font-size: 13px; font-weight: 400; line-height: 1.4; color: var(--s-ink-soft); }
+.mn-badge { margin-inline-start: auto; padding: 3px 9px; border-radius: 999px; background: #d81f2a; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .02em; }
+
+/* Sprachumschaltung und Beratungs-Button */
+.site .site-language-tabs { margin-inline-start: 6px; }
+.site .site-language-tabs a { padding: 8px 11px !important; font-size: 13px; }
+.site .site-nav a.cta { margin: 0; margin-inline-start: 10px; min-height: 44px; display: inline-flex; align-items: center; padding: 0 20px; border: 0; border-radius: 12px; background: var(--s-accent); color: #141414; font-size: 14.5px; font-weight: 700; letter-spacing: .005em; box-shadow: 0 12px 28px -14px rgba(255, 74, 67, .9); transition: background-color .18s, transform .18s; }
+.site .site-nav a.cta:hover { background: var(--s-accent-dark); color: #141414; transform: translateY(-1px); }
+
+/* ---------- Handy-Menü ---------- */
+.site .site-mobile-panel.mn-mobile { max-height: calc(100dvh - 130px); overflow-y: auto; gap: 2px; padding: 14px; background: #17181a; border-color: #34373c; border-radius: 0 0 20px 20px; overscroll-behavior: contain; }
+.mn-m-title { margin: 14px 8px 6px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--s-accent); }
+.mn-m-title:first-child { margin-top: 2px; }
+.site .site-mobile-panel > a.mn-m-item { display: flex; align-items: center; gap: 14px; min-height: 60px; padding: 10px; border-radius: 14px; color: var(--s-ink); font-weight: 400; }
+.site .site-mobile-panel > a.mn-m-item:hover, .site .site-mobile-panel > a.mn-m-item:focus-visible { background: #222427; }
+.site .site-mobile-panel > a.mn-m-item.active { background: rgba(255, 74, 67, .1); color: #fff; }
+.mn-mobile .mn-ic { width: 40px; height: 40px; }
+.mn-mobile .mn-tx strong { font-size: 16px; }
+.mn-mobile .site-mobile-panel-footer { position: sticky; bottom: -14px; margin: 10px -14px -14px; padding: 12px 14px 14px; background: #17181a; border-top: 1px solid #34373c; }
+.site .mn-mobile .site-mobile-panel-footer .cta { min-height: 44px; padding: 0 20px; border-radius: 12px; background: var(--s-accent); color: #141414; font-weight: 700; }
+
+/* ---------- Fußzeile mit Überschriften ---------- */
+.site .site-footer .inner.mn-footer { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px 48px; padding-block: 56px 72px; align-items: start; } /* unten Platz für den schwebenden Button "Animationen pausieren" */
+.mn-foot-brand { display: grid; gap: 18px; align-content: start; }
+.mn-foot-brand .footer-brand strong { font-size: 17px; }
+.mn-foot-brand .footer-brand small { font-size: 12.5px; color: var(--s-ink-soft); }
+.mn-foot-lead { margin: 0; max-width: 34ch; font-size: 14.5px; line-height: 1.65; color: var(--s-ink-soft); }
+.site .site-footer a.mn-foot-cta { display: inline-flex; align-items: center; justify-self: start; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 12px; background: var(--s-accent); color: #141414; font-size: 14.5px; font-weight: 700; transition: background-color .18s, transform .18s; }
+.site .site-footer a.mn-foot-cta:hover { background: var(--s-accent-dark); color: #141414; transform: translateY(-1px); }
+.mn-foot-title { margin: 0 0 14px; font-size: 12.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; }
+.mn-foot-col ul { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.site .site-footer .mn-foot-col a { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; font-size: 15px; font-weight: 500; color: #c3c5c1; transition: color .15s; }
+.site .site-footer .mn-foot-col a:hover { color: #fff; }
+.site .site-footer .mn-foot-col a[aria-current="page"] { color: #fff; }
+.site .site-footer .mn-foot-col .mn-badge { margin-inline-start: 4px; }
+.site .site-footer .mn-footer .footer-legal { grid-column: 1 / -1; padding-top: 22px; border-top: 1px solid var(--s-line); font-size: 13px; color: var(--s-ink-muted); }
+.site .site-footer .mn-footer .footer-legal span { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mn-panel, .mn-trigger .mn-chev, .site .site-nav a.cta { transition: none; }
+}
+
+/* ---------- Responsive ---------- */
+/* Das neue Menü ist kompakt (3 Punkte): Es passt bis ca. 1050 px in eine Zeile. Erst darunter folgt das Handy-Menü. */
+@media (min-width: 1051px) and (max-width: 1150px) {
+  .site .site-header .inner { flex-wrap: nowrap; }
+  .site .site-nav { display: flex; }
+  .site .site-mobile-nav { display: none; }
+}
+@media (min-width: 901px) and (max-width: 1180px) {
+  .site .site-nav .mn-trigger, .site .site-nav .mn-link { padding: 0 10px; font-size: 14.5px; }
+  .site .site-nav a.cta { padding: 0 15px; margin-inline-start: 4px; }
+  .site .site-language-tabs { margin-inline-start: 2px; }
+}
+@media (max-width: 900px) {
+  .site .site-footer .inner.mn-footer { grid-template-columns: 1fr 1fr; gap: 32px 28px; padding-block: 44px 24px; }
+  .mn-foot-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 480px) {
+  .site .site-footer .inner.mn-footer { grid-template-columns: 1fr; padding-inline: 20px; }
+  .site .site-announcement { font-size: 12.5px; }
+}
