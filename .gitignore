@@ -4,3 +4,7 @@ data/requests.jsonl
 *.log
 .DS_Store
 dist/
+# ERP: Zugangsdaten und Datenbankdateien nie veröffentlichen
+erp/config.php
+erp/storage/*.sqlite*
+erp/storage/backups/

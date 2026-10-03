@@ -1,0 +1,51 @@
+# D-Group ERP – Apache-Regeln (Strato, IONOS oder eigener Server mit mod_rewrite und mod_headers)
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Immer HTTPS (hinter einem Proxy zählt X-Forwarded-Proto)
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !=https [NC]
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Interne Ordner und Dateien sind von außen nicht abrufbar
+RewriteRule ^(src|storage|tests|tools)(/|$) - [F,L]
+RewriteRule ^(config[^/]*\.php|README\.md|\.git.*)$ - [F,L]
+RewriteRule \.(sqlite|sqlite3|db|sql|log|bak)$ - [F,L]
+
+# API: /api/... → api.php
+RewriteRule ^api/?(.*)$ api.php?_p=$1 [QSA,L]
+</IfModule>
+
+# Punkt-Dateien (.htaccess usw.) nie ausliefern
+<FilesMatch "^\.(ht|git)">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+<IfModule mod_headers.c>
+Header always setifempty X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "DENY"
+Header always setifempty Referrer-Policy "same-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+Header always set Cross-Origin-Opener-Policy "same-origin"
+Header always setifempty Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+Header always set Strict-Transport-Security "max-age=15552000" "expr=%{HTTPS} == 'on' || %{HTTP:X-Forwarded-Proto} == 'https'"
+# Oberfläche immer auf Aktualität prüfen (ETag), damit Updates sofort wirken
+<FilesMatch "\.(html|js|css|svg)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>

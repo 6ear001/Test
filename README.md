@@ -2,6 +2,8 @@
 
 Neue Landingpage für **D-Group IT Solutions**: helles, warmes Design mit der Markenfarbe Rot, eine **interaktive Kassen-Demo**, eine **PDA-Demo**, Pakete, FAQ und ein Beratungsformular, das über eine kleine JSON-API läuft. Läuft ohne Build-Schritt und ohne externe Abhängigkeiten (nur Node.js ≥ 20).
 
+> **Neu: ERP (PHP).** Im Ordner [`erp/`](erp/README.md) liegt ein vollständiges, mandantenfähiges ERP (Verkauf, Einkauf, Lager, Logistik, Buchhaltung mit Kunden- und Eigenkonten, Kundenverwaltung) in **PHP mit SQLite oder MySQL** – ohne Node. Anleitung: [`erp/README.md`](erp/README.md).
+
 ```bash
 npm start          # http://localhost:3000
 npm test           # Tests für Node-Server und PHP-API
