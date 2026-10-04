@@ -94,7 +94,7 @@ const B5 = { from: 13.6, to: 17.6, enter: 'right', build(root) {
   return { w, cards, m };
 }, update(lt, t, s) {
   s.w.update(lt, 0.05);
-  s.cards.forEach((c, i) => { const k = prog(lt, 0.7 + i * 0.5, 0.45, E.back); xf(c, { s: k, r: (i % 2 ? 2 : -2) * (1 - E.out(clamp((lt - 0.7 - i * 0.5) / 0.5))) * 6, o: lt >= 0.7 + i * 0.5 ? 1 : 0 }); });
+  s.cards.forEach((c, i) => { const k = prog(lt, 1.4 + i * 0.55, 0.45, E.back); xf(c, { s: k, r: (i % 2 ? 2 : -2) * (1 - E.out(clamp((lt - 0.7 - i * 0.5) / 0.5))) * 6, o: lt >= 1.4 + i * 0.55 ? 1 : 0 }); });
   s.m.set(EXPR.excited, { mouth: 0.4 + talk(lt, 0.2, 3.6) * 0.5, bob: Math.sin(lt * 7) * 3 });
   putMascot(s.m, { x: 330, y: 1400, s: 0.85 });
 } };
@@ -115,5 +115,5 @@ startVideo({
   duration: 23.2, shots: [B1, B2, B3, B4, B5, B6, B7],
   flashes: [[0.0, 0.15, 0.6], [2.5, 0.12, 0.4], [3.2, 0.12, 0.5], [6.6, 0.15, 0.7], [11.6, 0.2, 0.7], [13.6, 0.1, 0.4], [17.6, 0.1, 0.5], [18.8, 0.15, 0.6]],
   sfx: [[0.0, 'boom'], [0.5, 'tick'], [1.0, 'tick'], [1.5, 'tick'], [2.0, 'tick'], [2.5, 'tick'], [2.55, 'whoosh'], [3.0, 'tick'], [3.2, 'whoosh'], [3.9, 'pop'], [4.3, 'pop'], [4.7, 'pop'], [5.3, 'pop'], [6.3, 'riser'], [6.6, 'whoosh'], [7.2, 'boom'],
-    [8.6, 'whoosh'], [9.1, 'beep'], [9.6, 'beep'], [10.1, 'beep'], [10.6, 'beep'], [11.1, 'click'], [11.4, 'kaching'], [11.45, 'print'], [11.6, 'ding'], [13.6, 'whoosh'], [14.3, 'pop'], [14.8, 'pop'], [15.3, 'pop'], [15.8, 'pop'], [17.6, 'boom'], [18.8, 'whoosh'], [19.5, 'pop'], [21.4, 'click']],
+    [8.6, 'whoosh'], [9.1, 'beep'], [9.6, 'beep'], [10.1, 'beep'], [10.6, 'beep'], [11.1, 'click'], [11.4, 'kaching'], [11.45, 'print'], [11.6, 'ding'], [13.6, 'whoosh'], [15.0, 'pop'], [15.55, 'pop'], [16.1, 'pop'], [16.65, 'pop'], [17.6, 'boom'], [18.8, 'whoosh'], [19.5, 'pop'], [21.4, 'click']],
 });
