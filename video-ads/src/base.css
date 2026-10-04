@@ -26,3 +26,6 @@ html, body { background: #000; overflow: hidden; }
 .mono { font-family: "Outfit", sans-serif; direction: ltr; font-variant-numeric: tabular-nums; }
 .red { color: var(--red2); } .gold { color: var(--gold); } .green { color: var(--green); } .navy { color: var(--navy); } .white { color: #fff; } .mut { color: #8d93a3; }
 .hl { background: linear-gradient(transparent 62%, rgba(244,52,58,.45) 62% 92%, transparent 92%); }
+.mk { display: inline-block; overflow: hidden; vertical-align: top; padding: .32em .08em .28em; margin: -.32em -.08em -.28em; }
+.inw.pill { background: #0B1A33; color: #fff; border-radius: .28em; padding: 0 .28em; }
+.inw.hot { color: #F4343A; } .inw.gold { color: #FFC83D; } .inw.cream { color: #FFF1DD; } .inw.navy { color: #0B1A33; } .inw.white { color: #fff; }

@@ -1,20 +1,26 @@
 #!/usr/bin/env python3
-"""Erzeugt die Tonspur (Effekte + leichter Beat) aus der Effektliste des Videos. Aufruf: make-audio.py sfx.json out.wav"""
+"""Erzeugt die Tonspur (Effekte + leichter Beat) aus der Effektliste des Videos.
+Aufruf: make-audio.py sfx.json out.wav                     → Effekte + Beat in einer Datei
+        make-audio.py sfx.json sfx.wav --music music.wav    → getrennte Spuren (Effekte / Musik mit Pad + Arpeggio) zum Abmischen unter einer Sprachspur"""
 import json, sys, wave
 import numpy as np
 
 SR = 44100
 rng = np.random.default_rng(7)
 spec = json.load(open(sys.argv[1]))
+STEMS = "--music" in sys.argv
+MUSIC_OUT = sys.argv[sys.argv.index("--music") + 1] if STEMS else None
 dur = spec["duration"]
 n = int((dur + 1) * SR)
 mix = np.zeros(n)
+mus = np.zeros(n)
 
-def add(t, sig, gain=1.0):
+def add(t, sig, gain=1.0, buf=None):
+    buf = mix if buf is None else buf
     i = int(t * SR)
     if i >= n: return
     j = min(n, i + len(sig))
-    mix[i:j] += sig[: j - i] * gain
+    buf[i:j] += sig[: j - i] * gain
 
 def tt(d): return np.arange(int(d * SR)) / SR
 def env(d, a=0.003, k=6.0):
@@ -64,9 +70,9 @@ for t, name in spec["sfx"]:
     if name not in cache: cache[name] = BANK[name][0]()
     add(t, cache[name], BANK[name][1])
 
-# leichter Beat ab spec["music_from"]
+# Musik ab spec["music_from"]
 m0 = spec.get("music_from")
-if m0 is not None:
+if m0 is not None and not STEMS:
     bpm = 108; beat = 60 / bpm; t = m0; i = 0
     kick = thud()[: int(0.25 * SR)]; hat = (lowpass(noise(0.05), 9000) - lowpass(noise(0.05), 5000)) * np.exp(-tt(0.05) * 70) * 3
     notes = [82.4, 82.4, 98.0, 110.0]
@@ -78,8 +84,45 @@ if m0 is not None:
             clap = lowpass(noise(0.12), 3500) * np.exp(-tt(0.12) * 35); add(t, clap, 0.35 * g)
         tb = tt(beat * 0.9); f = notes[(i // 2) % 4]; add(t, np.sin(2 * np.pi * f * tb) * np.exp(-tb * 3) * 0.28 * g)
         t += beat; i += 1
+elif m0 is not None:
+    # Beat + Bass + Akkord-Pad + Pluck-Arpeggio (A-Moll: Am – F – C – G), 108 BPM
+    bpm = 108; beat = 60 / bpm; bar = beat * 4
+    kick = thud()[: int(0.28 * SR)]; hat = (lowpass(noise(0.05), 9000) - lowpass(noise(0.05), 5000)) * np.exp(-tt(0.05) * 70) * 3
+    clap = lowpass(noise(0.14), 3800) * np.exp(-tt(0.14) * 32)
+    midi = lambda m: 440.0 * 2 ** ((m - 69) / 12)
+    CH = [(45, [57, 60, 64]), (41, [53, 57, 60]), (48, [55, 60, 64]), (43, [55, 59, 62])]  # (Bass, Akkord)
+    nbar = int((dur - m0) / bar) + 1
+    for b in range(nbar):
+        tb0 = m0 + b * bar
+        if tb0 >= dur: break
+        g_in = min(1, 0.3 + (tb0 - m0) / 3.0)
+        root, chord = CH[b % 4]
+        # Pad: leicht verstimmte Sinus-/Dreieckwellen, langsamer An- und Abschwung
+        d = bar + 0.5; tp = tt(d); pad = np.zeros(len(tp))
+        for m in chord:
+            for det in (-0.004, 0.0, 0.004):
+                f = midi(m) * (1 + det); pad += np.sin(2 * np.pi * f * tp) + 0.35 * np.sin(2 * np.pi * 2 * f * tp)
+        pad *= np.minimum(tp / 0.45, 1) * np.minimum((d - tp) / 0.5, 1) * 0.045
+        add(tb0, pad, g_in, mus)
+        for i in range(4):
+            tb = tb0 + i * beat
+            add(tb, kick, 0.55 * g_in, mus)
+            add(tb + beat / 2, hat, 0.22 * g_in, mus)
+            if i % 2 == 1: add(tb, clap, 0.3 * g_in, mus)
+            tbass = tt(beat * 0.92); fb = midi(root) * (1 if i != 3 else 1.5)
+            add(tb, (np.sin(2 * np.pi * fb * tbass) + 0.25 * np.sin(2 * np.pi * 2 * fb * tbass)) * np.exp(-tbass * 2.6) * 0.3, g_in, mus)
+        # Arpeggio in Achteln
+        for k in range(8):
+            ta = tb0 + k * beat / 2; m = chord[(0, 1, 2, 1, 2, 1, 0, 1)[k]] + 12
+            tn = tt(0.34); fn = midi(m)
+            add(ta, (np.sin(2 * np.pi * fn * tn) + 0.4 * np.sin(2 * np.pi * 2 * fn * tn)) * np.exp(-tn * 9) * 0.13, g_in, mus)
 
 fade = np.ones(n); f0 = int((dur - 0.35) * SR); fade[f0:] = np.linspace(1, 0, n - f0)
+if STEMS:
+    mus *= np.minimum(1, np.maximum(0, (dur - np.arange(n) / SR) / 1.2))  # Musik blendet in den letzten 1,2 s aus
+    mus = np.tanh(mus * 1.3); mus = mus / max(1e-6, np.abs(mus).max()) * 0.85
+    with wave.open(MUSIC_OUT, "wb") as w:
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mus[: int(dur * SR)] * 32767).astype("<i2").tobytes())
 mix *= fade
 mix = np.tanh(mix * 1.2); mix = mix / max(1e-6, np.abs(mix).max()) * 0.85
 pcm = (mix[: int(dur * SR)] * 32767).astype("<i2")
