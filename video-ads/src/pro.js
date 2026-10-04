@@ -31,6 +31,11 @@ const ICONS = {
   cart: '<path d="M8 14 H20 L30 62 H74 L84 28 H26" stroke-linecap="round" stroke-linejoin="round"/><circle cx="36" cy="78" r="6"/><circle cx="68" cy="78" r="6"/>',
   chart: '<path d="M14 86 H86" stroke-linecap="round"/><rect x="20" y="52" width="15" height="34" rx="4"/><rect x="42" y="34" width="15" height="52" rx="4"/><rect x="64" y="14" width="15" height="72" rx="4"/>',
   smile: '<circle cx="48" cy="48" r="38"/><path d="M30 56 C36 70 60 70 66 56" stroke-linecap="round"/><path d="M35 36 V40 M61 36 V40" stroke-linecap="round"/>',
+  truck: '<path d="M6 26 H58 V62 H6 Z" stroke-linejoin="round"/><path d="M58 38 H76 L90 52 V62 H58 Z" stroke-linejoin="round"/><circle cx="26" cy="68" r="8"/><circle cx="74" cy="68" r="8"/>',
+  box: '<path d="M10 30 L48 12 L86 30 V68 L48 86 L10 68 Z" stroke-linejoin="round"/><path d="M10 30 L48 48 L86 30 M48 48 V86" stroke-linejoin="round"/>',
+  users: '<circle cx="34" cy="32" r="13"/><path d="M8 80 C8 58 20 50 34 50 C48 50 60 58 60 80" stroke-linecap="round"/><circle cx="66" cy="36" r="11"/><path d="M62 52 C78 50 90 58 90 78" stroke-linecap="round"/>',
+  sun: '<circle cx="48" cy="48" r="18"/><path d="M48 10 V20 M48 76 V86 M10 48 H20 M76 48 H86 M21 21 L28 28 M68 68 L75 75 M75 21 L68 28 M28 68 L21 75" stroke-linecap="round"/>',
+  moon: '<path d="M62 14 A36 36 0 1 0 82 66 A30 30 0 0 1 62 14 Z" stroke-linejoin="round"/>',
   receipt: '<path d="M22 8 H74 V90 L66 84 L58 90 L50 84 L42 90 L34 84 L22 90 Z" stroke-linejoin="round"/><path d="M34 28 H62 M34 42 H62 M34 56 H50" stroke-linecap="round"/>',
 };
 export function li(name, size = 96, color = '#fff', stroke = 6) {

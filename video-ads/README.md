@@ -5,6 +5,7 @@
 | `out/video-a.mp4` | **«الدرج ناقص»** – Geheimnis-Hook: «Der Kassenschub ist jede Nacht zu kurz?!» → Chaos mit Zettel und Taschenrechner → Auflösung mit dem D-Group-Kassensystem (Verkauf, TSE, Lager, Tagesbericht, Schublade stimmt) | 25,6 s |
 | `out/video-b.mp4` | **«٣ ثواني»** – Tempo-Hook: Stoppuhr, «Du hast 3 Sekunden, bevor der Kunde geht» → alte Methode (47 s) gegen Kasse (3 s) → Funktionen → Aufruf | 23,2 s |
 | `out/video-b3.mp4` | **«٣ ثواني» – Fassung 3 (B3)**: neuer Sprechertext (ElevenLabs-Datei `audio/voice-b3.mp3`, 41,9 s), Logos ohne Hintergrund (transparente PNGs in `img/`), Full HD 1080×1920 mit Bewegungsunschärfe | 42,6 s |
+| `out/video-y1.mp4` | **YouTube-Werbung (Y1)**, 16:9 Full HD: «٧ أدوات صارو نظام واحد» – sieben Alltagswerkzeuge werden zu einem System; ein Tag im Laden (Einkauf, Kasse, Lager/PDA, Logistik, Konten, Buchhaltung) mit Zeitleiste; Sprachspur `audio/voice-y1.mp3` (63,6 s) | 64,4 s |
 | `out/video-b2-4k.mp4`, `out/video-b2-1080.mp4` | **«٣ ثواني» – Studio-Fassung (B2)**: gleiche Idee, aber ohne Figur, reine Motion Graphics, **4K (2160×3840)** mit Bewegungsunschärfe, Wort für Wort passend zur ElevenLabs-Sprachspur, Musik mit Sidechain-Ducking | 29,0 s |
 
 Hauptfigur: **ريم** (Unternehmerin, Vektor-Figur, Kleidung/Frisur im Code änderbar). Ton: Soundeffekte und leichter Beat, **ohne Sprecherstimme** – die Sprechertexte in der Schamisch-Fassung stehen unten.
@@ -85,6 +86,9 @@ node render.mjs a 720    # schneller Probelauf in kleiner Auflösung
 ```
 
 ```bash
+# YouTube-Werbung Y1 (16:9 Full HD, ca. 20 Minuten auf 4 Kernen)
+node render-pro.mjs y1 --css 1920x1080 --out 1920 --scale 1.25 --music-from 7.2 --workers 4 --sub 4
+
 # Studio-Fassung B3 (Full HD, ca. 12–15 Minuten auf 4 Kernen)
 node render-pro.mjs b3 --voice audio/voice-b3.mp3 --workers 4 --sub 4
 node render-pro.mjs b3 --out 2160         # dieselbe Fassung in 4K

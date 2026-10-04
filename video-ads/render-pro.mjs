@@ -1,5 +1,6 @@
 // Studio-Renderer: Bewegungsunschärfe durch Sub-Frame-Mittelung (180°-Verschluss), Sprachspur + Musik + Effekte.
 //   node render-pro.mjs b3 --voice audio/voice-b3.mp3 [--scale 1.5] [--out 1080] [--sub 4] [--workers 4] [--music-from 10.6] [--bench 8] [--audio-only] [--range 0-1278]
+//   Querformat (YouTube):  node render-pro.mjs y1 --css 1920x1080 --out 1920 --music-from 7
 // Es wird mit `--scale` (Geräte-Pixelverhältnis) gerendert und auf `--out` Pixel Breite heruntergerechnet (Lanczos): scharfe Kanten in Full HD.
 // Ergebnis: out/video-<ad>.mp4  (--out 1080 → 1080×1920; --out 2160 → 4K)
 import http from "node:http";
@@ -15,9 +16,10 @@ const ad = argv[0] || "b3";
 const opt = (k, d) => { const i = argv.indexOf("--" + k); return i < 0 ? d : (argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[i + 1] : true); };
 const SCALE = Number(opt("scale", 1.5)), SUB = Number(opt("sub", 4)), WORKERS = Number(opt("workers", 2)), SHUTTER = Number(opt("shutter", 0.5)), FPS = 30;
 const VOICE = path.resolve(ROOT, opt("voice", `audio/voice-${ad}.mp3`));
-const OUTW = Number(opt("out", 1080)), OUTH = Math.round(OUTW * 16 / 9 / 2) * 2, MUSIC_FROM = Number(opt("music-from", 10.6));
+const [CSSW, CSSH] = String(opt("css", "1080x1920")).split("x").map(Number);
+const OUTW = Number(opt("out", CSSW)), OUTH = Math.round(OUTW * CSSH / CSSW / 2) * 2, MUSIC_FROM = Number(opt("music-from", 10.6));
 const CRF = String(opt("crf", 16));
-const W = 1080 * SCALE, H = 1920 * SCALE;
+const W = CSSW * SCALE, H = CSSH * SCALE;
 const OUT = path.join(ROOT, "out");
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".woff2": "font/woff2", ".json": "application/json" };
 const server = http.createServer(async (req, res) => {
@@ -30,7 +32,7 @@ const sh = (cmd, args) => { const r = spawnSync(cmd, args, { stdio: "inherit" })
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
 async function openPage(browser) {
-  const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: SCALE });
+  const page = await browser.newPage({ viewport: { width: CSSW, height: CSSH }, deviceScaleFactor: SCALE });
   page.on("pageerror", (e) => console.log("pageerror:", e.message));
   await page.goto(`http://localhost:${port}/src/index.html?ad=${ad}`);
   await page.waitForFunction("window.ready === true", null, { timeout: 30000 });
