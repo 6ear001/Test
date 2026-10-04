@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ar"><head><meta charset="utf-8"><title>D-Group Ad</title><link rel="stylesheet" href="base.css"></head>
+<body><div id="stage"></div>
+<script type="module">
+const ad = new URLSearchParams(location.search).get('ad') || 'a';
+const fonts = ['700 60px Cairo', '800 60px Cairo', '900 60px Cairo', '400 60px Lalezar', '700 60px ArefInk', '400 60px ArefInk', '700 40px Outfit', '600 40px Outfit'];
+await Promise.all(fonts.map((f) => document.fonts.load(f, 'أبجد ABC 123')));
+await document.fonts.ready;
+await import(`./ad-${ad}.js`);
+</script></body></html>

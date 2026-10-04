@@ -1,0 +1,28 @@
+@font-face { font-family: "Cairo"; font-weight: 700; src: url("../fonts/cairo-arabic-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cairo"; font-weight: 800; src: url("../fonts/cairo-arabic-800-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cairo"; font-weight: 900; src: url("../fonts/cairo-arabic-900-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lalezar"; font-weight: 400; src: url("../fonts/lalezar-arabic-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "ArefInk"; font-weight: 400; src: url("../fonts/aref-ruqaa-ink-arabic-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "ArefInk"; font-weight: 700; src: url("../fonts/aref-ruqaa-ink-arabic-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-weight: 600; src: url("../fonts/outfit-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-weight: 700; src: url("../fonts/outfit-latin-700-normal.woff2") format("woff2"); }
+:root { --cream: #F6F0E4; --navy: #0B1A33; --ink: #0E1015; --red: #F4343A; --red2: #FF5A52; --gold: #F5C242; --green: #1FBF75; --paper: #FFFDF7; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; overflow: hidden; }
+#stage { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--cream); font-family: "Cairo", "Outfit", sans-serif; direction: rtl; color: var(--ink); }
+.shot { position: absolute; inset: 0; overflow: hidden; display: none; }
+.abs { position: absolute; }
+.layer { position: absolute; inset: 0; pointer-events: none; }
+.ar { font-family: "Cairo", sans-serif; font-weight: 900; }
+.lz { font-family: "Lalezar", "Cairo", sans-serif; font-weight: 400; line-height: 1.05; }
+.brush { font-family: "ArefInk", "Cairo", serif; font-weight: 700; }
+.lat { font-family: "Outfit", sans-serif; direction: ltr; }
+.glitch { text-shadow: calc(var(--g, 0) * -1px) 0 #00e5ff, calc(var(--g, 0) * 1px) 0 #ff2d55; }
+.words { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 .28em; direction: rtl; text-align: center; }
+.w { white-space: nowrap; display: inline-block; will-change: transform, opacity, filter; }
+.tag { font-family: "Outfit", "Cairo", sans-serif; direction: ltr; font-weight: 700; letter-spacing: .08em; font-size: 34px; color: #00c2b0; }
+.chip { display: inline-flex; align-items: center; gap: 18px; padding: 22px 36px; border-radius: 28px; background: #fff; color: var(--ink); font-weight: 900; font-size: 54px; box-shadow: 0 14px 0 rgba(0,0,0,.18); }
+.card { background: var(--paper); border-radius: 36px; box-shadow: 0 22px 0 rgba(0,0,0,.14); }
+.mono { font-family: "Outfit", sans-serif; direction: ltr; font-variant-numeric: tabular-nums; }
+.red { color: var(--red2); } .gold { color: var(--gold); } .green { color: var(--green); } .navy { color: var(--navy); } .white { color: #fff; } .mut { color: #8d93a3; }
+.hl { background: linear-gradient(transparent 62%, rgba(244,52,58,.45) 62% 92%, transparent 92%); }
