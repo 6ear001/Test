@@ -45,7 +45,7 @@ Hauptfigur: **ريم** (Unternehmerin, Vektor-Figur, Kleidung/Frisur im Code än
 [loud] تلات ثواني!
 [fast] هي كل اللي عندك… قبل ما الزبون يطلع!
 [sarcastic] بالطريقة القديمة؟ ورقة… آلة حاسبة… وفكّة ضايعة!
-[excited] وبكاشير مجموعة داماس للحلول التقنية؟
+[excited] وبكاشير مجموعة دماس للحلول التقنية؟
 ضغطة… ضغطة… [energetic] دفع!
 [triumphant] والفاتورة طلعت… تلات ثواني!
 [fast] سريع، واضح، وكل شي بمكانو.
@@ -62,14 +62,14 @@ Die Einblendungen in `src/ad-b2.js` sind auf die Sekunde der Sprachaufnahme gele
 [loud] تلات ثواني… وخلصت العملية!
 [fast] الزبون ما بحب ينتظر… وإنت كمان ما عندك وقت تضيّعه!
 [sarcastic] لسه عم تكتب عالورق؟ وتحسب عالآلة الحاسبة؟ وتدوّر على الفكّة؟
-[excited] مع نظام الكاشير من مجموعة داماس للحلول التقنية… كل شي صار أسرع وأسهل!
+[excited] مع نظام الكاشير من مجموعة دماس للحلول التقنية… كل شي صار أسرع وأسهل!
 [energetic] اختار المنتج… امسح الباركود… استلم الدفعة…
 [triumphant] والفاتورة جاهزة فورًا!
 [fast] مبيعات أسرع… حسابات أدق… وإدارة أوضح.
         شاشة لمس، قارئ باركود، نظام TSE مدمج، وجهاز PDA للجرد ومتابعة المخزون.
 [playful] ولسه مو مصدّق إنو الموضوع بهالسهولة؟
 [warm] جرّبه بنفسك، وخلّي شغلك أسرع وأريح.
-       تواصل مع مجموعة داماس للحلول التقنية، واطلب نسختك التجريبية اليوم!
+       تواصل مع مجموعة دماس للحلول التقنية، واطلب نسختك التجريبية اليوم!
 ```
 
 Logos: `img/company-dark.png` / `company-light.png` (Firmenlogo, transparent; Schrift weiß bzw. marine), `img/app-mark.png` (App-Symbol freigestellt, ohne Kachel), `img/puzzle.png` (nur das Puzzle). Alle `at:`-Zeiten in `src/ad-b3.js` sind Sekunden der Sprachaufnahme.

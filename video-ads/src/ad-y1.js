@@ -218,12 +218,12 @@ const modScenes = MODS.map((m, mi) => mk(m.from, m.to, 'transparent', (cam) => {
   s.vis.update(t);
 }, true));
 
-// ================= 2 Enthüllung: «مع مجموعة داماس للحلول الرقمية… كل شي بنظام واحد! من الصبح لآخر الليل… نظام واحد بيدير محلك كلو» (7.25 – 14.8) =================
+// ================= 2 Enthüllung: «مع مجموعة دماس للحلول التقنية… كل شي بنظام واحد! من الصبح لآخر الليل… نظام واحد بيدير محلك كلو» (7.25 – 14.8) =================
 const CHIPS = [['cart', '08:00'], ['receipt', '10:00'], ['box', '12:00'], ['truck', '15:00'], ['users', '18:00'], ['chart', '22:00']];
 mk(7.25, 14.85, 'transparent', (cam) => {
-  const logo = img('../img/company-dark.png', 920, { left: '500px', top: '170px' });
+  const logo = img('../img/company-dark.png', 1120, { left: '400px', top: '235px' });
   const ring = h('div', { style: { position: 'absolute', left: '660px', top: '90px', width: '600px', height: '600px', borderRadius: '50%', border: '6px solid rgba(255,255,255,.25)' } });
-  const nm = rline([{ w: 'مع', at: 7.19 }, { w: 'مجموعة', at: 7.45 }, { w: 'داماس', at: 7.85 }, { w: 'للحلول', at: 8.35 }, { w: 'الرقمية', at: 8.8, cls: 'gold' }], { size: 104, color: '#fff', width: 1700, font: 'ar', gap: 0.25 }); abs(nm, 110, 620);
+  const nm = rline([{ w: 'مع', at: 7.19 }, { w: 'مجموعة', at: 7.45 }, { w: 'دماس', at: 7.85 }, { w: 'للحلول', at: 8.35 }, { w: 'التقنية', at: 8.8, cls: 'gold' }], { size: 104, color: '#fff', width: 1700, font: 'ar', gap: 0.25 }); abs(nm, 110, 620);
   const one = rline([{ w: 'كل', at: 9.5 }, { w: 'شي', at: 9.75 }, { w: 'بنظام', at: 10.0 }, { w: 'واحد!', at: 10.45, cls: 'gold' }], { size: 210, color: '#fff', width: 1700, gap: 0.22 }); abs(one, 110, 150);
   const day = rline([{ w: 'من', at: 11.13 }, { w: 'الصبح', at: 11.3 }, { w: 'لآخر', at: 11.85 }, { w: 'الليل…', at: 12.1, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(day, 110, 130);
   const path = h('div', { style: { position: 'absolute', left: '420px', top: '470px', width: '1080px', height: '0', borderTop: '6px dashed rgba(255,255,255,.28)' } });
@@ -307,7 +307,7 @@ mk(54.4, 58.8, `radial-gradient(1100px 900px at 50% 55%, #1d3a6b 0%, ${NAVY} 72%
   cam.append(grid(0.04));
   const a = rline([{ w: 'كل', at: 54.52 }, { w: 'قطعة', at: 54.9 }, { w: 'بمكانها', at: 55.4, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(a, 110, 60);
   const pieces = CHIPS.map(([ic], i) => { const el = h('div', { style: { position: 'absolute', left: '0', top: '0', width: '200px', height: '200px', borderRadius: '44px', background: [RED, '#1d3a6b', RED, '#1d3a6b', RED, '#1d3a6b'][i], border: '4px solid rgba(255,255,255,.22)', display: 'grid', placeItems: 'center', boxShadow: '0 30px 60px rgba(0,0,0,.4)' } }, li(ic, 110, '#fff', 5)); cam.append(el); return el; });
-  const mark = img('../img/puzzle.png', 480, { left: '720px', top: '300px', filter: 'drop-shadow(0 0 70px rgba(244,52,58,.6))' });
+  const mark = img('../img/mark-dark.png', 480, { left: '720px', top: '290px', filter: 'drop-shadow(0 0 70px rgba(244,52,58,.55))' });
   const b = rline([{ w: 'ونظام', at: 56.54 }, { w: 'واحد', at: 57.0, cls: 'gold' }, { w: 'لكل', at: 57.6 }, { w: 'شغلك', at: 58.0 }], { size: 140, color: '#fff', width: 1700, gap: 0.22 }); abs(b, 110, 800);
   const burst = makeBurst(cam, { x: 960, y: 520, n: 50, seed: 7 });
   cam.append(a, mark, b);
@@ -325,13 +325,13 @@ mk(54.4, 58.8, `radial-gradient(1100px 900px at 50% 55%, #1d3a6b 0%, ${NAVY} 72%
   s.burst(t - 56.7);
 });
 
-// ================= 5 Aufruf: «جرّب النسخة التجريبية من مجموعة داماس للحلول الرقمية… واطلبها اليوم!» (58.8 – 64.4) =================
+// ================= 5 Aufruf: «جرّب النسخة التجريبية من مجموعة دماس للحلول التقنية… واطلبها اليوم!» (58.8 – 64.4) =================
 mk(58.8, 64.4, `linear-gradient(180deg, #10264a 0%, ${NAVY} 60%, #3a0d14 100%)`, (cam) => {
   cam.append(glow('rgba(244,52,58,A)', 960, 1250, 1700, 520, 0.22), grid(0.04));
-  const app = img('../img/app-mark.png', 520, { left: '210px', top: '90px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
-  const logo = img('../img/company-dark.png', 640, { left: '150px', top: '640px' });
+  const app = img('../img/mark-dark.png', 500, { left: '220px', top: '90px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
+  const logo = img('../img/company-dark.png', 700, { left: '120px', top: '690px' });
   const a = rline([{ w: 'جرّب', at: 58.91 }, { w: 'النسخة', at: 59.3 }, { w: 'التجريبية', at: 59.75, cls: 'gold' }], { size: 124, color: '#fff', width: 860, align: 'flex-start', gap: 0.2 }); abs(a, 1000, 130);
-  const nm = rline([{ w: 'من', at: 60.35 }, { w: 'مجموعة', at: 60.6 }, { w: 'داماس', at: 61.05 }, { w: 'للحلول', at: 61.5 }, { w: 'الرقمية', at: 61.9, cls: 'gold' }], { size: 66, color: '#fff', width: 860, align: 'flex-start', font: 'ar', gap: 0.25 }); abs(nm, 1000, 470);
+  const nm = rline([{ w: 'من', at: 60.35 }, { w: 'مجموعة', at: 60.6 }, { w: 'دماس', at: 61.05 }, { w: 'للحلول', at: 61.5 }, { w: 'التقنية', at: 61.9, cls: 'gold' }], { size: 66, color: '#fff', width: 860, align: 'flex-start', font: 'ar', gap: 0.25 }); abs(nm, 1000, 470);
   const cta = h('div', { style: { position: 'absolute', left: '1080px', top: '690px', width: '720px', height: '160px', borderRadius: '80px', background: RED, boxShadow: '0 20px 0 #9a1219, 0 50px 90px rgba(244,52,58,.5)', display: 'grid', placeItems: 'center', overflow: 'hidden' } });
   const ct = rline([{ w: 'واطلبها', at: 62.47 }, { w: 'اليوم!', at: 62.9 }], { size: 78, color: '#fff', width: 640, font: 'ar', gap: 0.24 }); ct.style.position = 'relative'; cta.append(ct);
   const url = h('div', { class: 'lat', style: { position: 'absolute', left: '1190px', top: '900px', width: '500px', height: '84px', borderRadius: '42px', background: 'rgba(255,255,255,.1)', border: '3px solid rgba(255,255,255,.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', fontSize: '33px', fontWeight: 700 } }, li('globe', 46, '#fff', 5), 'd-group-it-solutions.de');
@@ -351,7 +351,7 @@ mk(58.8, 64.4, `linear-gradient(180deg, #10264a 0%, ${NAVY} 60%, #3a0d14 100%)`,
 });
 
 // ================= Logo-Wasserzeichen, Übergänge =================
-const bugL = img('../img/company-light.png', 250, { left: '54px', top: '34px' }), bugD = img('../img/company-dark.png', 250, { left: '54px', top: '34px' });
+const bugL = img('../img/company-light.png', 300, { left: '54px', top: '30px' }), bugD = img('../img/company-dark.png', 300, { left: '54px', top: '30px' });
 stage.append(bugL, bugD);
 const wipe = h('div', { style: { position: 'absolute', left: '-1040px', top: '-1460px', width: '4000px', height: '4000px', borderRadius: '50%', background: NAVY, display: 'none' } }); stage.append(wipe);
 const flash = h('div', { style: { position: 'absolute', inset: 0, background: '#fff', opacity: 0 } });

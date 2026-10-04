@@ -105,13 +105,13 @@ mk(B.s3, B.s4, CREAM, (cam) => {
   xf(s.timer, { s: seg(t, B.s3 + 0.05, B.s3 + 0.5, (x) => spr(x * 0.5, 12, 7)), o: 1 }); s.timer.style.color = Math.floor(t * 6) % 2 && sec > 30 ? '#8f1218' : RED;
 });
 
-// ================= 4 Marke: «مع نظام الكاشير من مجموعة داماس للحلول التقنية» (10.7 – 14.12) =================
+// ================= 4 Marke: «مع نظام الكاشير من مجموعة دماس للحلول التقنية» (10.7 – 14.12) =================
 mk(B.s4, B.s4b, `linear-gradient(180deg, #0F2548 0%, ${NAVY} 70%)`, (cam) => {
   cam.append(glow('rgba(244,52,58,A)', 540, 1900, 1000, 800, 0.45), h('div', { class: 'layer', style: { backgroundImage: 'linear-gradient(rgba(255,255,255,.05) 2px, transparent 2px), linear-gradient(90deg, rgba(255,255,255,.05) 2px, transparent 2px)', backgroundSize: '90px 90px', maskImage: 'linear-gradient(transparent, #000 60%, transparent)', WebkitMaskImage: 'linear-gradient(transparent, #000 60%, transparent)' } }));
   const w1 = rline([{ w: 'مع', at: 10.93 }, { w: 'نظام', at: 11.15 }, { w: 'الكاشير', at: 11.57, cls: 'gold' }], { size: 150, color: '#fff' }); abs(w1, 40, 170);
-  const app = img('../img/app-mark.png', 540, { left: '270px', top: '420px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
+  const app = img('../img/mark-dark.png', 540, { left: '270px', top: '420px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
   const logo = img('../img/company-dark.png', 780, { left: '150px', top: '1010px' });
-  const nm = rline([{ w: 'مجموعة', at: 12.15 }, { w: 'داماس', at: 12.62 }, { w: 'للحلول', at: 13.0 }, { w: 'التقنية', at: 13.6, cls: 'gold' }], { size: 104, color: '#fff', width: 900 }); abs(nm, 90, 1390);
+  const nm = rline([{ w: 'مجموعة', at: 12.15 }, { w: 'دماس', at: 12.62 }, { w: 'للحلول', at: 13.0 }, { w: 'التقنية', at: 13.6, cls: 'gold' }], { size: 104, color: '#fff', width: 900 }); abs(nm, 90, 1390);
   cam.append(w1, app, logo, nm);
   return { w1, app, logo, nm };
 }, (lt, s, cam, t) => {
@@ -217,7 +217,7 @@ mk(B.s6b, B.s7, `linear-gradient(180deg, #11284d 0%, ${NAVY} 80%)`, (cam) => {
     const ripple = ic === 'touch' ? h('div', { style: { position: 'absolute', left: '137px', top: '75px', width: '200px', height: '200px', borderRadius: '50%', border: '6px solid rgba(255,200,61,.8)' } }) : null;
     c.append(w1, w2); if (scanLine) c.append(scanLine); if (ripple) c.append(ripple); cam.append(c); return { c, at, scanLine, ripple };
   });
-  const hub = h('div', { style: { position: 'absolute', left: '440px', top: '860px', width: '200px', height: '200px', borderRadius: '50%', background: '#fff', boxShadow: '0 20px 60px rgba(0,0,0,.45), 0 0 0 10px rgba(244,52,58,.35)', display: 'grid', placeItems: 'center' } }, img('../img/puzzle.png', 120, { position: 'relative' }));
+  const hub = h('div', { style: { position: 'absolute', left: '440px', top: '860px', width: '200px', height: '200px', borderRadius: '50%', background: '#fff', boxShadow: '0 20px 60px rgba(0,0,0,.45), 0 0 0 10px rgba(244,52,58,.35)', display: 'grid', placeItems: 'center' } }, img('../img/mark-light.png', 130, { position: 'relative' }));
   const pulse = h('div', { style: { position: 'absolute', left: '440px', top: '860px', width: '200px', height: '200px', borderRadius: '50%', border: '6px solid rgba(255,255,255,.7)' } });
   cam.append(pulse, hub);
   return { cards, hub, pulse };
@@ -261,10 +261,10 @@ mk(B.s8, B.s9, CREAM, (cam) => {
 // ================= 9 Endkarte (37.05 – 42.6) =================
 mk(B.s9, B.end + 0.5, `linear-gradient(180deg, #10264a 0%, ${NAVY} 60%, #3a0d14 100%)`, (cam) => {
   cam.append(glow('rgba(244,52,58,A)', 540, 1500, 1000, 700, 0.5));
-  const app = img('../img/app-mark.png', 400, { left: '340px', top: '110px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
+  const app = img('../img/mark-dark.png', 400, { left: '340px', top: '110px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
   const logo = img('../img/company-dark.png', 700, { left: '190px', top: '560px' });
   const w1 = rline([{ w: 'تواصل', at: 37.21, cls: 'gold' }, { w: 'مع', at: 37.65, cls: 'gold' }], { size: 124 }); abs(w1, 50, 880);
-  const nm = rline([{ w: 'مجموعة', at: 37.8 }, { w: 'داماس', at: 38.3 }, { w: 'للحلول', at: 38.73 }, { w: 'التقنية', at: 39.11 }], { size: 92, color: '#fff', width: 960, font: 'ar' }); abs(nm, 60, 1040);
+  const nm = rline([{ w: 'مجموعة', at: 37.8 }, { w: 'دماس', at: 38.3 }, { w: 'للحلول', at: 38.73 }, { w: 'التقنية', at: 39.11 }], { size: 92, color: '#fff', width: 960, font: 'ar' }); abs(nm, 60, 1040);
   const cta = h('div', { style: { position: 'absolute', left: '60px', top: '1380px', width: '960px', height: '170px', borderRadius: '85px', background: RED, boxShadow: '0 20px 0 #9a1219, 0 50px 90px rgba(244,52,58,.5)', display: 'grid', placeItems: 'center', overflow: 'hidden' } });
   const ctaText = rline([{ w: 'واطلب', at: 39.81 }, { w: 'نسختك', at: 40.18 }, { w: 'التجريبية', at: 40.62 }, { w: 'اليوم!', at: 41.25 }], { size: 58, color: '#fff', width: 900, font: 'ar', gap: 0.22 }); ctaText.style.position = 'relative'; cta.append(ctaText);
   const url = h('div', { class: 'lat', style: { position: 'absolute', left: '170px', top: '1640px', width: '740px', height: '120px', borderRadius: '60px', background: 'rgba(255,255,255,.1)', border: '3px solid rgba(255,255,255,.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '24px', fontSize: '48px', fontWeight: 700 } }, li('globe', 66, '#fff', 5), 'd-group-it-solutions.de');
