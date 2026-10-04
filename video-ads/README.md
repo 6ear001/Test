@@ -4,6 +4,7 @@
 |---|---|---|
 | `out/video-a.mp4` | **«الدرج ناقص»** – Geheimnis-Hook: «Der Kassenschub ist jede Nacht zu kurz?!» → Chaos mit Zettel und Taschenrechner → Auflösung mit dem D-Group-Kassensystem (Verkauf, TSE, Lager, Tagesbericht, Schublade stimmt) | 25,6 s |
 | `out/video-b.mp4` | **«٣ ثواني»** – Tempo-Hook: Stoppuhr, «Du hast 3 Sekunden, bevor der Kunde geht» → alte Methode (47 s) gegen Kasse (3 s) → Funktionen → Aufruf | 23,2 s |
+| `out/video-b3.mp4` | **«٣ ثواني» – Fassung 3 (B3)**: neuer Sprechertext (ElevenLabs-Datei `audio/voice-b3.mp3`, 41,9 s), Logos ohne Hintergrund (transparente PNGs in `img/`), Full HD 1080×1920 mit Bewegungsunschärfe | 42,6 s |
 | `out/video-b2-4k.mp4`, `out/video-b2-1080.mp4` | **«٣ ثواني» – Studio-Fassung (B2)**: gleiche Idee, aber ohne Figur, reine Motion Graphics, **4K (2160×3840)** mit Bewegungsunschärfe, Wort für Wort passend zur ElevenLabs-Sprachspur, Musik mit Sidechain-Ducking | 29,0 s |
 
 Hauptfigur: **ريم** (Unternehmerin, Vektor-Figur, Kleidung/Frisur im Code änderbar). Ton: Soundeffekte und leichter Beat, **ohne Sprecherstimme** – die Sprechertexte in der Schamisch-Fassung stehen unten.
@@ -54,6 +55,24 @@ Hauptfigur: **ريم** (Unternehmerin, Vektor-Figur, Kleidung/Frisur im Code än
 
 Die Einblendungen in `src/ad-b2.js` sind auf die Sekunde der Sprachaufnahme gelegt (Zeitpunkte aus den Sprechpausen der Datei, `at:` je Wort). Wird die Sprachspur neu aufgenommen, müssen nur diese `at:`-Werte (und die Szenen-`from`/`to`) angepasst werden.
 
+**Video B3 – gesprochener Text**
+
+```
+[loud] تلات ثواني… وخلصت العملية!
+[fast] الزبون ما بحب ينتظر… وإنت كمان ما عندك وقت تضيّعه!
+[sarcastic] لسه عم تكتب عالورق؟ وتحسب عالآلة الحاسبة؟ وتدوّر على الفكّة؟
+[excited] مع نظام الكاشير من مجموعة داماس للحلول التقنية… كل شي صار أسرع وأسهل!
+[energetic] اختار المنتج… امسح الباركود… استلم الدفعة…
+[triumphant] والفاتورة جاهزة فورًا!
+[fast] مبيعات أسرع… حسابات أدق… وإدارة أوضح.
+        شاشة لمس، قارئ باركود، نظام TSE مدمج، وجهاز PDA للجرد ومتابعة المخزون.
+[playful] ولسه مو مصدّق إنو الموضوع بهالسهولة؟
+[warm] جرّبه بنفسك، وخلّي شغلك أسرع وأريح.
+       تواصل مع مجموعة داماس للحلول التقنية، واطلب نسختك التجريبية اليوم!
+```
+
+Logos: `img/company-dark.png` / `company-light.png` (Firmenlogo, transparent; Schrift weiß bzw. marine), `img/app-mark.png` (App-Symbol freigestellt, ohne Kachel), `img/puzzle.png` (nur das Puzzle). Alle `at:`-Zeiten in `src/ad-b3.js` sind Sekunden der Sprachaufnahme.
+
 ## Neu rendern oder Texte ändern
 
 Voraussetzungen: Node.js, ffmpeg, Python 3 mit numpy, Chromium (Pfad in `CHROME`).
@@ -66,13 +85,14 @@ node render.mjs a 720    # schneller Probelauf in kleiner Auflösung
 ```
 
 ```bash
-# Studio-Fassung B2 (4K + 1080p, ca. 15–25 Minuten auf 4 Kernen)
-node render-pro.mjs b2 --voice audio/voice-b2.mp3 --workers 4 --sub 4
-node render-pro.mjs b2 --bench 8          # Geschwindigkeit je Aufnahme messen
-node render-pro.mjs b2 --audio-only       # nur den Ton mischen → out/mix-b2.m4a
+# Studio-Fassung B3 (Full HD, ca. 12–15 Minuten auf 4 Kernen)
+node render-pro.mjs b3 --voice audio/voice-b3.mp3 --workers 4 --sub 4
+node render-pro.mjs b3 --out 2160         # dieselbe Fassung in 4K
+node render-pro.mjs b3 --bench 8          # Geschwindigkeit je Aufnahme messen
+node render-pro.mjs b3 --audio-only       # nur den Ton mischen → out/mix-b3.m4a
 ```
 
-`--sub` ist die Zahl der Sub-Bilder je Frame für die Bewegungsunschärfe (180°-Verschluss), `--scale 2` ergibt 4K, `--scale 1` ein schnelles 1080p. Der Ton wird in `tools/make-audio.py` (Effekte und Musik als getrennte Spuren) erzeugt und mit ffmpeg unter die Stimme gemischt (Hochpass, Kompressor, −15 LUFS, Sidechain-Ducking, Limiter).
+`--sub` ist die Zahl der Sub-Bilder je Frame für die Bewegungsunschärfe (180°-Verschluss), `--scale` ist die interne Renderauflösung (1.5 → 1620×2880, wird für scharfe Kanten auf `--out` heruntergerechnet), `--scale 1` ergibt einen schnellen Probelauf. Der Ton wird in `tools/make-audio.py` (Effekte und Musik als getrennte Spuren) erzeugt und mit ffmpeg unter die Stimme gemischt (Hochpass, Kompressor, −15 LUFS, Sidechain-Ducking, Limiter).
 
 Alle Texte, Zeiten und Szenen stehen in `src/ad-a.js`, `src/ad-b.js` und `src/ad-b2.js` (Bausteine für B2: `src/pro.js`; eine Szene = ein Block mit `from`/`to` in Sekunden). Figur und Ausdrücke: `src/lib.js`. Kassen-Terminal: `src/parts.js`. Endkarte: `src/common.js`. Schriften: Cairo, Lalezar und Aref Ruqaa Ink (alle SIL Open Font License) plus Outfit.
 Die Kassenoberfläche im Video ist eine nachgebaute Darstellung und zeigt kein echtes Kundensystem.

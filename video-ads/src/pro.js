@@ -29,6 +29,8 @@ const ICONS = {
   globe: '<circle cx="48" cy="48" r="38"/><ellipse cx="48" cy="48" rx="16" ry="38"/><path d="M10 48 H86 M16 28 H80 M16 68 H80"/>',
   check: '<path d="M22 50 L41 69 L76 31" stroke-linecap="round" stroke-linejoin="round"/>',
   cart: '<path d="M8 14 H20 L30 62 H74 L84 28 H26" stroke-linecap="round" stroke-linejoin="round"/><circle cx="36" cy="78" r="6"/><circle cx="68" cy="78" r="6"/>',
+  chart: '<path d="M14 86 H86" stroke-linecap="round"/><rect x="20" y="52" width="15" height="34" rx="4"/><rect x="42" y="34" width="15" height="52" rx="4"/><rect x="64" y="14" width="15" height="72" rx="4"/>',
+  smile: '<circle cx="48" cy="48" r="38"/><path d="M30 56 C36 70 60 70 66 56" stroke-linecap="round"/><path d="M35 36 V40 M61 36 V40" stroke-linecap="round"/>',
   receipt: '<path d="M22 8 H74 V90 L66 84 L58 90 L50 84 L42 90 L34 84 L22 90 Z" stroke-linejoin="round"/><path d="M34 28 H62 M34 42 H62 M34 56 H50" stroke-linecap="round"/>',
 };
 export function li(name, size = 96, color = '#fff', stroke = 6) {

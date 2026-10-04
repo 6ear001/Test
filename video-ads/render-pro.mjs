@@ -1,6 +1,7 @@
-// Studio-Renderer: 4K (2160×3840), Bewegungsunschärfe durch Sub-Frame-Mittelung (180°-Verschluss), Sprachspur + Musik + Effekte.
-//   node render-pro.mjs b2 --voice audio/voice-b2.mp3 [--scale 2] [--sub 4] [--workers 2] [--bench 8] [--audio-only] [--range 0-870]
-// Ergebnis: out/video-<ad>-4k.mp4 (Master) und out/video-<ad>-1080.mp4 (runterskaliert, überall abspielbar)
+// Studio-Renderer: Bewegungsunschärfe durch Sub-Frame-Mittelung (180°-Verschluss), Sprachspur + Musik + Effekte.
+//   node render-pro.mjs b3 --voice audio/voice-b3.mp3 [--scale 1.5] [--out 1080] [--sub 4] [--workers 4] [--music-from 10.6] [--bench 8] [--audio-only] [--range 0-1278]
+// Es wird mit `--scale` (Geräte-Pixelverhältnis) gerendert und auf `--out` Pixel Breite heruntergerechnet (Lanczos): scharfe Kanten in Full HD.
+// Ergebnis: out/video-<ad>.mp4  (--out 1080 → 1080×1920; --out 2160 → 4K)
 import http from "node:http";
 import { spawn, spawnSync } from "node:child_process";
 import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
@@ -10,11 +11,12 @@ import { chromium } from "playwright-core";
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
-const ad = argv[0] || "b2";
+const ad = argv[0] || "b3";
 const opt = (k, d) => { const i = argv.indexOf("--" + k); return i < 0 ? d : (argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[i + 1] : true); };
-const SCALE = Number(opt("scale", 2)), SUB = Number(opt("sub", 4)), WORKERS = Number(opt("workers", 2)), SHUTTER = Number(opt("shutter", 0.5)), FPS = 30;
-const VOICE = path.resolve(ROOT, opt("voice", "audio/voice-b2.mp3"));
-const CRF = String(opt("crf", 17));
+const SCALE = Number(opt("scale", 1.5)), SUB = Number(opt("sub", 4)), WORKERS = Number(opt("workers", 2)), SHUTTER = Number(opt("shutter", 0.5)), FPS = 30;
+const VOICE = path.resolve(ROOT, opt("voice", `audio/voice-${ad}.mp3`));
+const OUTW = Number(opt("out", 1080)), OUTH = Math.round(OUTW * 16 / 9 / 2) * 2, MUSIC_FROM = Number(opt("music-from", 10.6));
+const CRF = String(opt("crf", 16));
 const W = 1080 * SCALE, H = 1920 * SCALE;
 const OUT = path.join(ROOT, "out");
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".woff2": "font/woff2", ".json": "application/json" };
@@ -51,7 +53,7 @@ await probe.close();
 // ---------- Ton ----------
 await mkdir(OUT, { recursive: true });
 const jsonPath = path.join(OUT, `sfx-${ad}.json`), sfxWav = path.join(OUT, `sfx-${ad}.wav`), musWav = path.join(OUT, `music-${ad}.wav`), mixAudio = path.join(OUT, `mix-${ad}.m4a`);
-await writeFile(jsonPath, JSON.stringify({ duration, sfx, music_from: 8.4 }));
+await writeFile(jsonPath, JSON.stringify({ duration, sfx, music_from: MUSIC_FROM }));
 sh("python3", [path.join(ROOT, "tools", "make-audio.py"), jsonPath, sfxWav, "--music", musWav]);
 // Sprache: Rumpel raus, leicht komprimieren, auf -16 LUFS; Musik wird per Sidechain unter der Stimme abgesenkt.
 const fc = [
@@ -75,8 +77,8 @@ async function work(c) {
   const browser = await chromium.launch({ executablePath: CHROME, args: ["--no-sandbox"] });
   const page = await openPage(browser);
   const ff = spawn("ffmpeg", ["-v", "error", "-y", "-f", "image2pipe", "-framerate", String(FPS * SUB), "-c:v", "mjpeg", "-i", "-",
-    "-vf", `scale=in_range=full:in_color_matrix=bt601:out_range=limited:out_color_matrix=bt709,tmix=frames=${SUB},select='not(mod(n+1\\,${SUB}))',setpts=PTS-STARTPTS,format=yuv420p`,
-    "-r", String(FPS), "-fps_mode", "cfr", "-c:v", "libx264", "-preset", "fast", "-crf", CRF, "-profile:v", "high", "-level", "5.1", "-pix_fmt", "yuv420p",
+    "-vf", `tmix=frames=${SUB},select='not(mod(n+1\\,${SUB}))',setpts=PTS-STARTPTS,scale=${OUTW}:${OUTH}:flags=lanczos:in_range=full:in_color_matrix=bt601:out_range=limited:out_color_matrix=bt709,format=yuv420p`,
+    "-r", String(FPS), "-fps_mode", "cfr", "-c:v", "libx264", "-preset", "medium", "-crf", CRF, "-profile:v", "high", "-level", OUTW > 1100 ? "5.1" : "4.2", "-pix_fmt", "yuv420p",
     "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-x264-params", "keyint=60:min-keyint=30:scenecut=0", "-movflags", "+faststart", c.file], { stdio: ["pipe", "inherit", "inherit"] });
   for (let f = c.a; f < c.b; f++) {
     for (let k = 0; k < SUB; k++) {
@@ -96,8 +98,7 @@ server.close();
 // ---------- Zusammensetzen ----------
 const list = path.join(OUT, `chunks-${ad}.txt`);
 await writeFile(list, chunks.map((c) => `file '${c.file}'`).join("\n"));
-const master = path.join(OUT, `video-${ad}-4k.mp4`), small = path.join(OUT, `video-${ad}-1080.mp4`);
-sh("ffmpeg", ["-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", list, "-i", mixAudio, "-map", "0:v", "-map", "1:a", "-c", "copy", "-shortest", "-movflags", "+faststart", master]);
-sh("ffmpeg", ["-v", "error", "-y", "-i", master, "-vf", "scale=1080:1920:flags=lanczos", "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-pix_fmt", "yuv420p", "-profile:v", "high", "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", "-c:a", "copy", "-movflags", "+faststart", small]);
+const final = path.join(OUT, `video-${ad}.mp4`);
+sh("ffmpeg", ["-v", "error", "-y", "-f", "concat", "-safe", "0", "-i", list, "-i", mixAudio, "-map", "0:v", "-map", "1:a", "-c", "copy", "-shortest", "-movflags", "+faststart", final]);
 for (const c of chunks) await rm(c.file, { force: true });
-log("fertig:", master, small);
+log("fertig:", final);
