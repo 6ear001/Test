@@ -339,7 +339,7 @@ export function page({ title, subtitle, actions, back }, ...content) {
     content);
 }
 export const card = (title, ...content) => h('section', { class: 'card' }, title ? h('h2', { class: 'card-title' }, title) : null, content);
-export const kpi = (label, value, tone = '', href) => h(href ? 'a' : 'div', { class: `kpi ${tone}`, href }, h('span', { class: 'kpi-label' }, label), h('strong', { class: 'kpi-value' }, value));
+export const kpi = (label, value, tone = '', href, sub) => h(href ? 'a' : 'div', { class: `kpi ${tone}`, href }, h('span', { class: 'kpi-label' }, label), h('strong', { class: 'kpi-value' }, value), sub ? h('small', { class: 'kpi-sub' }, sub) : null);
 export const btn = (label, onclick, cls = '', ic) => h('button', { class: `btn ${cls}`.trim(), type: 'button', onclick }, ic ? icon(ic, 16) : null, label);
 export const link = (label, href, cls = '') => h('a', { class: cls, href }, label);
 export const loading = () => h('div', { class: 'loading' }, 'Lädt …');

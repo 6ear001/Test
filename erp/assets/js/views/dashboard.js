@@ -13,8 +13,8 @@ register('/', async () => {
   if ('payables_cents' in d) tiles.push(kpi('Offene Verbindlichkeiten', eur(d.payables_cents), d.payables_overdue_cents > 0 ? 'warn' : '', '#/accounting/open-items?type=creditors'));
   if ('cash_cents' in d) tiles.push(kpi('Bank & Kasse', eur(d.cash_cents), d.cash_cents < 0 ? 'bad' : '', '#/accounting'));
   if ('stock_value_cents' in d) tiles.push(kpi('Lagerwert', eur(d.stock_value_cents), '', '#/stock'), kpi('Artikel unter Mindestbestand', String(d.low_stock_count), d.low_stock_count ? 'warn' : 'good', '#/purchasing/reorder'));
-  if ('open_orders' in d) tiles.push(kpi('Offene Aufträge', `${d.open_orders.count} (${eur(d.open_orders.net_cents)})`, '', '#/sales/orders'));
-  if ('shipments_active' in d) tiles.push(kpi('Sendungen unterwegs', `${d.shipments_active}${d.shipments_late ? ` · ${d.shipments_late} verspätet` : ''}`, d.shipments_late || d.shipments_problem ? 'warn' : '', '#/logistics/shipments'));
+  if ('open_orders' in d) tiles.push(kpi('Offene Aufträge', String(d.open_orders.count), '', '#/sales/orders', `Netto ${eur(d.open_orders.net_cents)}`));
+  if ('shipments_active' in d) tiles.push(kpi('Sendungen unterwegs', String(d.shipments_active), d.shipments_late || d.shipments_problem ? 'warn' : '', '#/logistics/shipments', d.shipments_late ? `${d.shipments_late} verspätet` : d.shipments_problem ? `${d.shipments_problem} mit Problem` : null));
   if (d.tasks_due) tiles.push(kpi('Fällige Aufgaben', String(d.tasks_due), 'warn', '#/customers'));
 
   const fresh = 'revenue_year_cents' in d && d.customers === 0 && d.leads === 0 && d.revenue_year_cents === 0;

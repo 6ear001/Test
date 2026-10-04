@@ -16,6 +16,34 @@ Webbasiertes ERP als **SaaS-fähige PHP-Anwendung** (mehrere Firmen/Mandanten au
 
 Alle Listen lassen sich als CSV exportieren. Die Oberfläche ist deutsch, für Handy und Desktop gebaut, mit hellem und dunklem Design.
 
+## Lokal testen (auf Ihrem eigenen Rechner)
+
+Sie brauchen nur PHP. Datenbank und Webserver sind nicht nötig: PHP bringt einen kleinen Testserver mit, die Daten liegen in `storage/erp.sqlite`.
+
+**1. PHP installieren (einmalig)**
+* **Windows:** PHP 8.1 oder neuer als ZIP von <https://windows.php.net/download> entpacken (z. B. nach `C:\php`), den Ordner zur Umgebungsvariable `PATH` hinzufügen. Dann `php.ini-development` nach `php.ini` kopieren und darin diese Zeilen aktivieren (Semikolon am Anfang entfernen): `extension_dir = "ext"`, `extension=pdo_sqlite`, `extension=sqlite3`, `extension=mbstring`. Alternativ **XAMPP** installieren (bringt PHP, Apache und MySQL mit).
+* **macOS:** `brew install php` · **Debian/Ubuntu:** `sudo apt install php-cli php-sqlite3 php-mbstring`
+
+**2. Starten** – im Ordner `erp/`:
+
+```bash
+php -S localhost:8080
+```
+
+Dann <http://localhost:8080> öffnen und „Firma registrieren“ wählen. Zum Beenden Strg+C.
+
+**Mit fertigen Beispieldaten** (Kunden, Lieferanten, Artikel, Bestellungen, Rechnungen, Sendungen, Buchungen – damit Sie alle Bereiche gleich sehen):
+
+* Windows: Doppelklick auf `tools\start-local.bat` bzw. `tools\start-local.bat demo` in der Eingabeaufforderung
+* macOS/Linux: `sh tools/start-local.sh demo`
+* oder von Hand: Server wie oben starten, in einem zweiten Fenster `php tools/demo-data.php` ausführen
+
+Anmeldung: `demo@example.com` / `Demo-Passwort-2026`. Zurücksetzen: Server beenden und `storage/erp.sqlite` löschen.
+
+**Mit XAMPP statt `php -S`:** Ordner `erp/` nach `C:\xampp\htdocs\erp` kopieren, Apache starten, <http://localhost/erp/> öffnen. Für MySQL in phpMyAdmin eine Datenbank `erp` anlegen und in `config.php` eintragen (`'driver' => 'mysql', 'host' => 'localhost', 'name' => 'erp', 'user' => 'root', 'pass' => ''`). Auf `localhost` leitet die `.htaccess` nicht auf HTTPS um.
+
+**Automatischer Testlauf** (im Git-Repository, Ordner `erp/`): `php tests/run.php` – prüft über 330 Fälle gegen eine frische Datenbank.
+
 ## Installation auf Strato / IONOS (oder jedem Webspace mit PHP)
 
 Voraussetzung: **PHP 8.1 oder neuer** (im Kundenbereich einstellbar) mit `pdo_sqlite` **oder** `pdo_mysql`. Empfohlen für den Dauerbetrieb: eine MySQL-/MariaDB-Datenbank.
@@ -86,7 +114,7 @@ Der Testlauf startet einen PHP-Server mit frischer Datenbank und prüft über 33
 index.html, assets/        Oberfläche (HTML, CSS, JavaScript-Module, kein Build nötig)
 api.php                    Einstiegspunkt der API
 src/                       PHP-Code: Db, Schema, Auth, Router, Accounting, Stock, Payments, Api/*
-tools/                     Betriebswerkzeuge (Sicherung, Mandant löschen)
+tools/                     Werkzeuge (lokaler Start, Beispieldaten, Sicherung, Mandant löschen)
 tests/                     Testlauf (php tests/run.php)
 config.sample.php          Vorlage für config.php
 storage/                   SQLite-Datei und Sicherungen (von außen gesperrt)

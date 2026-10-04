@@ -6,7 +6,8 @@ AddDefaultCharset utf-8
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# Immer HTTPS (hinter einem Proxy zählt X-Forwarded-Proto)
+# Immer HTTPS (hinter einem Proxy zählt X-Forwarded-Proto) – außer beim lokalen Testen unter localhost
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:[0-9]+)?$ [NC]
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !=https [NC]
 RewriteCond %{REQUEST_URI} !^/\.well-known/
