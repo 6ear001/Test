@@ -224,7 +224,7 @@ mk(B.s6b, B.s7, `linear-gradient(180deg, #11284d 0%, ${NAVY} 80%)`, (cam) => {
 }, (lt, s, cam, t) => {
   camPush(cam, lt, 6.55, 0.04, 540, 1000);
   s.cards.forEach((cd) => { const k = t - cd.at; const on = k >= 0; xf(cd.c, { s: on ? spr(k, 12, 6.5) : 0, y: on ? 0 : 60, o: on ? 1 : 0 }); const act = on && k < 0.9 ? 1 - k / 0.9 : 0; cd.c.style.borderColor = `rgba(244,52,58,${0.25 + act * 0.75})`; cd.c.style.background = `rgba(255,255,255,${0.07 + act * 0.1})`;
-    if (cd.scanLine) { const f = ((t - cd.at) * 1.6) % 1; xf(cd.scanLine, { y: 40 + (f < 0.5 ? f * 2 : 2 - f * 2) * 230, o: on ? 1 : 0 }); }
+    if (cd.scanLine) { const f = ((t - cd.at) * 1.6) % 1; xf(cd.scanLine, { y: 10 + (f < 0.5 ? f * 2 : 2 - f * 2) * 170, o: on ? 1 : 0 }); }
     if (cd.ripple) { const f = ((t - cd.at) * 1.1) % 1; xf(cd.ripple, { s: 0.5 + f * 1.1, o: on ? 1 - f : 0 }); } });
   const hk = t - 29.9; xf(s.hub, { s: hk < 0 ? 0 : spr(hk, 11, 6.5), o: hk < 0 ? 0 : 1 });
   const pk = ((t - 30.1) * 0.9) % 1; xf(s.pulse, { s: 1 + pk * 1.1, o: hk < 0 ? 0 : (1 - pk) * 0.8 });
