@@ -66,7 +66,7 @@ mk(0, 7.3, CREAM, (cam) => {
 });
 
 // ================= Hintergrund für alles danach (7.2 – 51.3) =================
-const bgSc = mk(7.2, 51.3, `linear-gradient(180deg, #0F2548 0%, ${NAVY} 80%)`, (cam) => {
+const bgSc = mk(7.2, 50.2, `linear-gradient(180deg, #0F2548 0%, ${NAVY} 80%)`, (cam) => {
   const g = glow('rgba(244,52,58,A)', 960, 1200, 1500, 700, 0.35);
   cam.append(grid(0.045), g);
   const gl = h('div', { style: { position: 'absolute', left: '-300px', top: '-300px', width: '900px', height: '900px', borderRadius: '50%', background: 'radial-gradient(closest-side, rgba(70,130,255,.16), transparent)' } });
@@ -93,7 +93,7 @@ const MODS = [
   { ic: 'box', time: '12:00', from: 28.45, to: 36.0, kick: [{ w: 'والمخزون؟', at: 28.56 }], title: 'المخزون', titleAt: 28.9, lines: [[{ w: 'بينقص', at: 29.37 }, { w: 'لحالو', at: 29.8 }, { w: 'مع', at: 30.2 }, { w: 'كل', at: 30.4 }, { w: 'بيعة', at: 30.55 }], [{ w: 'بينبّهك', at: 31.05 }, { w: 'قبل', at: 31.66 }, { w: 'ما', at: 31.8 }, { w: 'تخلص', at: 32.05 }], [{ w: 'PDA', at: 33.57 }, { w: 'بتجرد', at: 34.26 }, { w: 'بدقايق', at: 34.99 }]] },
   { ic: 'truck', time: '15:00', from: 36.0, to: 39.75, kick: [{ w: 'في', at: 36.08 }, { w: 'بضاعة', at: 36.3 }, { w: 'لازم', at: 36.65 }, { w: 'توصل؟', at: 36.9 }], title: 'التوصيل', titleAt: 37.1, lines: [[{ w: 'تابع', at: 37.45 }, { w: 'الشحنات', at: 37.85 }], [{ w: 'والتسليم', at: 38.31 }], [{ w: 'من', at: 38.9 }, { w: 'نفس', at: 39.0 }, { w: 'الشاشة', at: 39.12 }]] },
   { ic: 'users', time: '18:00', from: 39.75, to: 44.45, kick: [{ w: 'وحساب', at: 39.85 }, { w: 'كل', at: 40.3 }, { w: 'زبون', at: 40.6 }, { w: 'ومورّد؟', at: 40.85 }], title: 'الحسابات', titleAt: 41.3, lines: [[{ w: 'واضح', at: 41.61 }], [{ w: 'مين', at: 42.19 }, { w: 'دفع', at: 42.45 }], [{ w: 'ومين', at: 42.91 }, { w: 'باقي', at: 43.2 }, { w: 'عليه', at: 43.45 }], [{ w: 'وكم', at: 43.95 }]] },
-  { ic: 'chart', time: '22:00', from: 44.45, to: 50.95, kick: [{ w: 'وآخر', at: 44.59 }, { w: 'اليوم؟', at: 44.95 }], title: 'المحاسبة', titleAt: 45.3, lines: [[{ w: 'المحاسبة', at: 45.61 }, { w: 'جاهزة', at: 46.2 }], [{ w: 'المبيعات', at: 46.84 }], [{ w: 'المصاريف', at: 47.61 }], [{ w: 'والربح', at: 48.25 }], [{ w: 'بضغطة', at: 48.88 }, { w: 'وحدة', at: 50.01 }]] },
+  { ic: 'chart', time: '22:00', from: 44.45, to: 49.9, kick: [{ w: 'وآخر', at: 44.59 }, { w: 'اليوم؟', at: 44.95 }], title: 'المحاسبة', titleAt: 45.3, lines: [[{ w: 'المحاسبة', at: 45.61 }, { w: 'جاهزة', at: 46.2 }], [{ w: 'المبيعات', at: 46.84 }], [{ w: 'المصاريف', at: 47.61 }], [{ w: 'والربح', at: 48.25 }], [{ w: 'بضغطة', at: 48.88 }, { w: 'وحدة', at: 49.38 }]] },
 ];
 
 // Fenster-Inhalte je Modul
@@ -261,9 +261,9 @@ const ACT = MODS.map((m) => m.kick[0].at - 0.15);
 const bigPos = (i) => ({ x: 960 + (2.5 - i) * 232, y: 640 });
 const railPos = (i) => ({ x: 1680 - i * 288, y: 985 });
 const updateHud = (t) => {
-  const vis = t >= 9.55 && t < 51.0;
+  const vis = t >= 9.55 && t < 49.95;
   hud.style.display = vis ? 'block' : 'none'; if (!vis) return;
-  const outA = 1 - seg(t, 50.8, 51.0, E.lin);
+  const outA = 1 - seg(t, 49.7, 49.9, E.lin);
   let active = -1; ACT.forEach((a, i) => { if (t >= a) active = i; });
   const toRail = seg(t, 13.3, 14.4, E.inOut);
   chips.forEach(({ el, box, lbl, ck, i }) => {
@@ -272,21 +272,21 @@ const updateHud = (t) => {
     const b = bigPos(i), r = railPos(i); const sz = lerp(1, 0.56, fly);
     const x = lerp(b.x, r.x, fly) - 85, y = lerp(b.y, r.y, fly) - 85;
     const fadeBig = t >= 11.0 && t < 13.3 ? 1 : 1; // Reihe bleibt sichtbar
-    const isAct = i === active && t < 50.9, done = i < active || (active === 5 && i === 5 && t > 50.2);
+    const isAct = i === active && t < 49.9, done = i < active || (active === 5 && i === 5 && t > 49.7);
     const hover = fly < 1 ? Math.sin(t * 2 + i) * 6 * (1 - fly) : 0;
     xf(el, { x, y: y + hover, s: appear * sz * (isAct ? 1.18 : 1), o: appear * outA * fadeBig });
     box.style.background = fly < 0.5 ? RED : (isAct ? RED : done ? GREEN : 'rgba(255,255,255,.14)');
     box.style.boxShadow = isAct ? '0 0 0 8px rgba(244,52,58,.35), 0 20px 50px rgba(244,52,58,.5)' : '0 30px 60px rgba(0,0,0,.25)';
     lbl.style.opacity = String(fly > 0.7 ? 1 : 0); lbl.style.color = isAct ? '#fff' : 'rgba(255,255,255,.65)';
-    xf(ck, { s: done ? pop(t, ACT[i + 1] ?? 50.9, 12, 7) : 0, o: done ? 1 : 0 });
+    xf(ck, { s: done ? pop(t, ACT[i + 1] ?? 49.75, 12, 7) : 0, o: done ? 1 : 0 });
   });
-  const prog = active < 0 ? 0 : (active + (active === 5 ? clamp((t - ACT[5]) / 5.8) : clamp((t - ACT[active]) / (ACT[active + 1] - ACT[active])))) / 5;
+  const prog = active < 0 ? 0 : (active + (active === 5 ? clamp((t - ACT[5]) / 5.3) : clamp((t - ACT[active]) / (ACT[active + 1] - ACT[active])))) / 5;
   xf(railLine, { o: toRail * outA }); xf(railLine.firstChild, { sx: clamp(prog), sy: 1 });
 };
 
-// ================= 3 Schluss: «مبيعات أسرع… حسابات أدق… وإدارة أوضح» (50.95 – 54.4) =================
-const TRIO = [['bolt', 'مبيعات', 'أسرع', 51.0, 51.43], ['chart', 'حسابات', 'أدق', 51.92, 52.45], ['eye', 'إدارة', 'أوضح', 53.21, 53.6]];
-mk(50.95, 54.4, `linear-gradient(180deg, #FF6A60 0%, ${RED} 45%, #C21F28 100%)`, (cam) => {
+// ================= 3 Schluss: «مبيعات أسرع… حسابات أدق… وإدارة أوضح» (49.9 – 53.1) =================
+const TRIO = [['bolt', 'مبيعات', 'أسرع', 50.01, 50.42], ['chart', 'حسابات', 'أدق', 51.0, 51.4], ['eye', 'إدارة', 'أوضح', 51.92, 52.45]];
+mk(49.9, 53.1, `linear-gradient(180deg, #FF6A60 0%, ${RED} 45%, #C21F28 100%)`, (cam) => {
   const rays = h('div', { style: { position: 'absolute', left: '-300px', top: '-1000px', width: '2520px', height: '2520px', borderRadius: '50%', background: 'repeating-conic-gradient(rgba(255,255,255,.12) 0deg 8deg, rgba(255,255,255,0) 8deg 24deg)', maskImage: 'radial-gradient(closest-side, #000 15%, transparent 78%)', WebkitMaskImage: 'radial-gradient(closest-side, #000 15%, transparent 78%)' } });
   cam.append(rays);
   const cols = TRIO.map(([ic, a, b2, t1, t2], i) => {
@@ -298,32 +298,41 @@ mk(50.95, 54.4, `linear-gradient(180deg, #FF6A60 0%, ${RED} 45%, #C21F28 100%)`,
   });
   return { rays, cols };
 }, (lt, s, cam, t) => {
-  camPush(cam, lt, 3.4, 0.05); xf(s.rays, { r: lt * 12 });
+  camPush(cam, lt, 3.2, 0.05); xf(s.rays, { r: lt * 12 });
   s.cols.forEach(({ box, l1, l2, t1 }) => { box && xf(box, { s: pop(t, t1 - 0.05, 11, 6.5), r: lerp(-14, 0, E.out5(clamp((t - t1) / 0.5))), o: t >= t1 - 0.05 ? 1 : 0 }); l1.update(t); l2.update(t); });
 });
 
-// ================= 4 Zusammensetzen: «كل قطعة بمكانها… ونظام واحد لكل شغلك» (54.4 – 58.8) =================
-mk(54.4, 58.8, `radial-gradient(1100px 900px at 50% 55%, #1d3a6b 0%, ${NAVY} 72%)`, (cam) => {
+// ================= 4 Zusammensetzen: «كل قطعة بمكانها… ونظام واحد لكل شغلك» (53.1 – 56.4) =================
+mk(53.1, 56.4, `radial-gradient(1100px 900px at 50% 55%, #1d3a6b 0%, ${NAVY} 72%)`, (cam) => {
   cam.append(grid(0.04));
-  const a = rline([{ w: 'كل', at: 54.52 }, { w: 'قطعة', at: 54.8 }, { w: 'بمكانها', at: 55.22, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(a, 110, 60);
+  const a = rline([{ w: 'كل', at: 53.21 }, { w: 'قطعة', at: 53.32 }, { w: 'بمكانها', at: 53.59, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(a, 110, 60);
   const pieces = CHIPS.map(([ic], i) => { const el = h('div', { style: { position: 'absolute', left: '0', top: '0', width: '200px', height: '200px', borderRadius: '44px', background: [RED, '#1d3a6b', RED, '#1d3a6b', RED, '#1d3a6b'][i], border: '4px solid rgba(255,255,255,.22)', display: 'grid', placeItems: 'center', boxShadow: '0 30px 60px rgba(0,0,0,.4)' } }, li(ic, 110, '#fff', 5)); cam.append(el); return el; });
   const mark = img('../img/mark-dark.png', 480, { left: '720px', top: '290px', filter: 'drop-shadow(0 0 70px rgba(244,52,58,.55))' });
-  const b = rline([{ w: 'ونظام', at: 56.54 }, { w: 'واحد', at: 57.2, cls: 'gold' }, { w: 'لكل', at: 57.8 }, { w: 'شغلك', at: 58.2 }], { size: 140, color: '#fff', width: 1700, gap: 0.22 }); abs(b, 110, 800);
+  const b = rline([{ w: 'ونظام', at: 54.52 }, { w: 'واحد', at: 55.0, cls: 'gold' }, { w: 'لكل', at: 55.4 }, { w: 'شغلك', at: 55.75 }], { size: 140, color: '#fff', width: 1700, gap: 0.22 }); abs(b, 110, 800);
   const burst = makeBurst(cam, { x: 960, y: 520, n: 50, seed: 7 });
   cam.append(a, mark, b);
   return { a, pieces, mark, b, burst };
 }, (lt, s, cam, t) => {
-  s.a.update(t); xf(s.a, { o: 1 - seg(t, 56.4, 56.6, E.lin) }); s.b.update(t);
+  s.a.update(t); xf(s.a, { o: 1 - seg(t, 54.3, 54.5, E.lin) }); s.b.update(t);
   s.pieces.forEach((el, i) => {
     const col = i % 3, row = Math.floor(i / 3); const fx = 960 + (1 - col) * 218 - 100, fy = 520 + (row - 0.5) * 218 - 100;
-    const a0 = 54.52 + i * 0.13, k = t - a0; const ang = rnd(i + 3) * 6.28; const sx = Math.cos(ang) * 1500, sy = Math.sin(ang) * 900;
-    const arrive = clamp(k / 0.65); const e = E.out5(arrive);
-    const merge = seg(t, 56.45, 56.75, E.in);
-    xf(el, { x: lerp(fx + sx, fx, e) + (960 - 100 - fx) * merge, y: lerp(fy + sy, fy, e) + (520 - 100 - fy) * merge, s: (k < 0 ? 0 : 1) * (1 - 0.9 * merge) * (1 + (k > 0.6 && k < 0.9 ? 0.06 * Math.sin((k - 0.6) / 0.3 * Math.PI) : 0)), r: lerp(360, 0, e), o: k < 0 ? 0 : 1 - merge });
+    const a0 = 53.21 + i * 0.09, k = t - a0; const ang = rnd(i + 3) * 6.28; const sx = Math.cos(ang) * 1500, sy = Math.sin(ang) * 900;
+    const arrive = clamp(k / 0.55); const e = E.out5(arrive);
+    const merge = seg(t, 54.25, 54.5, E.in);
+    xf(el, { x: lerp(fx + sx, fx, e) + (960 - 100 - fx) * merge, y: lerp(fy + sy, fy, e) + (520 - 100 - fy) * merge, s: (k < 0 ? 0 : 1) * (1 - 0.9 * merge) * (1 + (k > 0.5 && k < 0.8 ? 0.06 * Math.sin((k - 0.5) / 0.3 * Math.PI) : 0)), r: lerp(360, 0, e), o: k < 0 ? 0 : 1 - merge });
   });
-  const mk0 = t - 56.7; xf(s.mark, { s: mk0 < 0 ? 0 : spr(mk0, 10, 5.5), r: lerp(-20, 0, E.out5(clamp(mk0 / 0.6))), o: mk0 < 0 ? 0 : 1 });
-  s.burst(t - 56.7);
+  const mk0 = t - 54.5; xf(s.mark, { s: mk0 < 0 ? 0 : spr(mk0, 10, 5.5), r: lerp(-20, 0, E.out5(clamp(mk0 / 0.6))), o: mk0 < 0 ? 0 : 1 });
+  s.burst(t - 54.5);
 });
+
+// ================= 4b Frage: «ولسه مو مصدّق إنو الموضوع بهالسهولة؟» (56.4 – 58.8) =================
+mk(56.4, 58.8, 'radial-gradient(1100px 900px at 50% 55%, #4a1018 0%, #0B0D12 72%)', (cam) => {
+  const q = h('div', { class: 'brush', style: { position: 'absolute', left: 0, top: '-130px', width: '1920px', textAlign: 'center', fontSize: '1250px', lineHeight: 1, color: 'rgba(244,52,58,.10)' } }, '؟');
+  const a = rline([{ w: 'ولسه', at: 56.55, cls: 'white' }, { w: 'مو', at: 56.93, cls: 'white' }, { w: 'مصدّق؟', at: 57.05, cls: 'hot' }], { size: 210, font: 'brush', width: 1700, gap: 0.22 }); abs(a, 110, 120);
+  const b = rline([{ w: 'إنو', at: 57.43, cls: 'white' }, { w: 'الموضوع', at: 57.68, cls: 'white' }], { size: 170, font: 'brush', width: 1700, gap: 0.22 }); abs(b, 110, 420);
+  const c = rline([{ w: 'بهالسهولة؟', at: 58.05, cls: 'gold' }], { size: 260, font: 'brush', width: 1700 }); abs(c, 110, 650);
+  cam.append(q, a, b, c); return { q, a, b, c };
+}, (lt, s, cam, t) => { camPush(cam, lt, 2.4, 0.08); s.a.update(t); s.b.update(t); s.c.update(t); xf(s.q, { r: lerp(-8, 6, lt / 2.4), s: 1 + lt * 0.05, o: seg(t, 56.45, 56.8, E.lin) }); });
 
 // ================= 5 Aufruf: «جرّب النسخة التجريبية من مجموعة دماس للحلول التقنية… واطلبها اليوم!» (58.8 – 64.4) =================
 mk(58.8, 64.4, `linear-gradient(180deg, #10264a 0%, ${NAVY} 60%, #3a0d14 100%)`, (cam) => {
@@ -331,7 +340,7 @@ mk(58.8, 64.4, `linear-gradient(180deg, #10264a 0%, ${NAVY} 60%, #3a0d14 100%)`,
   const app = img('../img/mark-dark.png', 500, { left: '220px', top: '90px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
   const logo = img('../img/company-dark.png', 700, { left: '120px', top: '690px' });
   const a = rline([{ w: 'جرّب', at: 58.91 }, { w: 'النسخة', at: 59.2 }, { w: 'التجريبية', at: 59.68, cls: 'gold' }], { size: 124, color: '#fff', width: 860, align: 'flex-start', gap: 0.2 }); abs(a, 1000, 130);
-  const nm = rline([{ w: 'من', at: 60.29 }, { w: 'مجموعة', at: 60.41 }, { w: 'دماس', at: 60.78 }, { w: 'للحلول', at: 61.02 }, { w: 'التقنية', at: 61.42, cls: 'gold' }], { size: 66, color: '#fff', width: 860, align: 'flex-start', font: 'ar', gap: 0.25 }); abs(nm, 1000, 470);
+  const nm = rline([{ w: 'من', at: 60.29 }, { w: 'مجموعة', at: 60.41 }, { w: 'دماس', at: 60.85 }, { w: 'للحلول', at: 61.12 }, { w: 'التقنية', at: 61.5, cls: 'gold' }], { size: 66, color: '#fff', width: 860, align: 'flex-start', font: 'ar', gap: 0.25 }); abs(nm, 1000, 470);
   const cta = h('div', { style: { position: 'absolute', left: '1080px', top: '690px', width: '720px', height: '160px', borderRadius: '80px', background: RED, boxShadow: '0 20px 0 #9a1219, 0 50px 90px rgba(244,52,58,.5)', display: 'grid', placeItems: 'center', overflow: 'hidden' } });
   const ct = rline([{ w: 'واطلبها', at: 62.47 }, { w: 'اليوم!', at: 62.9 }], { size: 78, color: '#fff', width: 640, font: 'ar', gap: 0.24 }); ct.style.position = 'relative'; cta.append(ct);
   const url = h('div', { class: 'lat', style: { position: 'absolute', left: '1190px', top: '900px', width: '500px', height: '84px', borderRadius: '42px', background: 'rgba(255,255,255,.1)', border: '3px solid rgba(255,255,255,.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', fontSize: '33px', fontWeight: 700 } }, li('globe', 46, '#fff', 5), 'd-group-it-solutions.de');
@@ -357,7 +366,7 @@ const wipe = h('div', { style: { position: 'absolute', left: '-1040px', top: '-1
 const flash = h('div', { style: { position: 'absolute', inset: 0, background: '#fff', opacity: 0 } });
 const vig = h('div', { style: { position: 'absolute', inset: 0, background: 'radial-gradient(ellipse at center, rgba(0,0,0,0) 62%, rgba(0,0,0,.32) 100%)' } });
 stage.append(flash, vig);
-const FLASHES = [[0.08, 0.1, 0.5], [7.25, 0.18, 0.55], [9.5, 0.1, 0.25], [50.95, 0.14, 0.6], [54.4, 0.14, 0.5], [56.7, 0.2, 0.7], [58.75, 0.12, 0.35]];
+const FLASHES = [[0.08, 0.1, 0.5], [7.25, 0.18, 0.55], [9.5, 0.1, 0.25], [49.9, 0.14, 0.6], [53.1, 0.14, 0.5], [54.5, 0.2, 0.7], [56.4, 0.12, 0.45], [58.75, 0.12, 0.35]];
 
 window.DURATION = 64.4;
 window.SFX = [
@@ -366,10 +375,11 @@ window.SFX = [
   [15.2, 'pop'], [16.0, 'tick'], [16.4, 'tick'], [16.8, 'tick'], [17.95, 'click'], [18.7, 'ding'], [20.0, 'pop'], [21.2, 'whoosh'], [21.7, 'pop'],
   [22.85, 'click'], [23.55, 'beep'], [24.0, 'click'], [24.95, 'click'], [25.2, 'kaching'], [25.75, 'print'], [27.35, 'ding'], [28.35, 'whoosh'], [28.9, 'pop'],
   [29.4, 'tick'], [29.8, 'tick'], [30.2, 'tick'], [30.6, 'tick'], [31.05, 'beep'], [31.1, 'pop'], [33.1, 'whoosh'], [34.3, 'tick'], [34.6, 'tick'], [34.9, 'tick'], [35.5, 'ding'], [35.9, 'whoosh'], [37.1, 'pop'], [36.7, 'tick'], [39.3, 'ding'], [39.65, 'whoosh'],
-  [40.0, 'tick'], [40.4, 'tick'], [40.8, 'tick'], [41.3, 'pop'], [42.19, 'ding'], [42.91, 'beep'], [43.95, 'pop'], [44.35, 'whoosh'], [45.3, 'pop'], [46.84, 'pop'], [47.6, 'pop'], [48.25, 'ding'], [49.35, 'click'], [50.0, 'kaching'],
-  [50.9, 'whoosh'], [51.0, 'boom'], [51.45, 'pop'], [52.0, 'pop'], [52.45, 'pop'], [53.21, 'pop'], [53.75, 'pop'], [54.3, 'whoosh'],
-  [54.52, 'pop'], [54.65, 'pop'], [54.78, 'pop'], [54.91, 'pop'], [55.04, 'pop'], [55.17, 'pop'], [56.45, 'riser'], [56.7, 'boom'], [56.9, 'ding'], [58.7, 'whoosh'],
-  [58.9, 'pop'], [59.68, 'pop'], [61.42, 'ding'], [62.35, 'pop'], [62.6, 'whoosh'], [63.1, 'click'],
+  [40.0, 'tick'], [40.4, 'tick'], [40.8, 'tick'], [41.3, 'pop'], [42.19, 'ding'], [42.91, 'beep'], [43.95, 'pop'], [44.35, 'whoosh'], [45.3, 'pop'], [46.84, 'pop'], [47.6, 'pop'], [48.25, 'ding'], [49.35, 'click'],
+  [49.5, 'kaching'], [49.8, 'whoosh'], [49.9, 'boom'], [50.01, 'pop'], [50.42, 'pop'], [51.0, 'pop'], [51.4, 'pop'], [51.92, 'pop'], [52.45, 'pop'], [53.0, 'whoosh'],
+  [53.21, 'pop'], [53.3, 'pop'], [53.39, 'pop'], [53.48, 'pop'], [53.57, 'pop'], [53.66, 'pop'], [54.25, 'riser'], [54.5, 'boom'], [54.7, 'ding'], [56.3, 'whoosh'],
+  [56.55, 'boom'], [56.93, 'pop'], [57.43, 'pop'], [58.05, 'pop'], [58.7, 'whoosh'],
+  [58.9, 'pop'], [59.68, 'pop'], [61.5, 'ding'], [62.35, 'pop'], [62.6, 'whoosh'], [63.1, 'click'],
 ];
 
 window.render = (t) => {
@@ -380,8 +390,8 @@ window.render = (t) => {
   });
   updateHud(t);
   // Wasserzeichen
-  const bl = t < 7.0 ? 1 : 0, bd = t >= 14.7 && t < 51.0 ? 1 : 0;
-  bugL.style.opacity = String(bl * seg(t, 0.2, 0.5, E.lin) * (1 - seg(t, 6.9, 7.1, E.lin))); bugD.style.opacity = String(bd * seg(t, 14.7, 15.0, E.lin) * (1 - seg(t, 50.8, 51.0, E.lin)));
+  const bl = t < 7.0 ? 1 : 0, bd = t >= 14.7 && t < 49.95 ? 1 : 0;
+  bugL.style.opacity = String(bl * seg(t, 0.2, 0.5, E.lin) * (1 - seg(t, 6.9, 7.1, E.lin))); bugD.style.opacity = String(bd * seg(t, 14.7, 15.0, E.lin) * (1 - seg(t, 49.7, 49.9, E.lin)));
   // Kreisblende Hook → Navy
   const c = seg(t, 6.95, 7.25, E.inOut); wipe.style.display = t >= 6.95 && t < 7.4 ? 'block' : 'none'; xf(wipe, { s: Math.max(c, 0.001), o: t < 7.25 ? 1 : 1 - seg(t, 7.25, 7.4, E.lin) });
   let f = 0; for (const [t0, d, p] of FLASHES) if (t >= t0 && t < t0 + d) f = Math.max(f, p * (1 - (t - t0) / d)); flash.style.opacity = String(f);
