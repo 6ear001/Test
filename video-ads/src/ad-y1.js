@@ -48,8 +48,8 @@ mk(0, 7.3, CREAM, (cam) => {
     const lbl = it.lbl ? rline([{ w: it.lbl, at: it.at + 0.05 }], { size: 64, color: INK, width: 460 }) : null; if (lbl) abs(lbl, it.x + it.s / 2 - 230, it.y + it.s + 6);
     cam.append(box); if (lbl) cam.append(lbl); return { box, lbl, it };
   });
-  const l1 = rline([{ w: 'لسه', at: 4.8 }, { w: 'عم', at: 5.1 }, { w: 'تدير', at: 5.3 }, { w: 'محلك', at: 5.65 }], { size: 112, color: INK, width: 1100, gap: 0.22 }); ctr(l1, 350, 1100); l1.style.left = '410px';
-  const l2 = rline([{ w: 'بسبع', at: 6.05 }, { w: 'أدوات؟', at: 6.4, cls: 'hot' }], { size: 170, color: INK, width: 1100, gap: 0.22 }); abs(l2, 410, 500, { width: '1100px' });
+  const l1 = rline([{ w: 'لسه', at: 4.8 }, { w: 'عم', at: 5.08 }, { w: 'تدير', at: 5.4 }, { w: 'محلك', at: 5.69 }], { size: 112, color: INK, width: 1100, gap: 0.22 }); ctr(l1, 350, 1100); l1.style.left = '410px';
+  const l2 = rline([{ w: 'بسبع', at: 5.98 }, { w: 'أدوات؟', at: 6.4, cls: 'hot' }], { size: 170, color: INK, width: 1100, gap: 0.22 }); abs(l2, 410, 500, { width: '1100px' });
   cam.append(l1, l2);
   return { items, l1, l2 };
 }, (lt, s, cam, t) => {
@@ -88,12 +88,12 @@ const press = (btn, t, at, label, doneLabel, base = RED, shadow = '#b3151b') => 
 
 // ---------- Modul-Szenen ----------
 const MODS = [
-  { ic: 'cart', time: '08:00', from: 14.8, to: 21.25, kick: [{ w: 'الصبح؟', at: 14.99 }], title: 'الشراء', titleAt: 15.2, lines: [[{ w: 'اطلب', at: 16.95 }, { w: 'من', at: 17.35 }, { w: 'المورّد', at: 17.5 }, { w: 'بضغطة', at: 17.95 }], [{ w: 'أمر', at: 18.56 }, { w: 'الشراء', at: 18.95 }, { w: 'جاهز', at: 19.35 }], [{ w: 'كل', at: 19.87 }, { w: 'طلب', at: 20.2 }, { w: 'محفوظ', at: 20.5 }]] },
-  { ic: 'receipt', time: '10:00', from: 21.25, to: 28.45, kick: [{ w: 'الزبون', at: 21.41 }, { w: 'وصل؟', at: 21.8 }], title: 'الكاشير', titleAt: 21.7, lines: [[{ w: 'اختار', at: 22.41 }, { w: 'المنتج', at: 22.8 }], [{ w: 'امسح', at: 23.47 }, { w: 'الباركود', at: 23.85 }], [{ w: 'استلم', at: 24.56 }, { w: 'الدفعة', at: 24.95 }], [{ w: 'الفاتورة', at: 25.56 }, { w: 'جاهزة', at: 26.1 }], [{ w: 'TSE', at: 26.77 }, { w: 'مدمج', at: 27.4 }]] },
-  { ic: 'box', time: '12:00', from: 28.45, to: 36.0, kick: [{ w: 'والمخزون؟', at: 28.56 }], title: 'المخزون', titleAt: 28.9, lines: [[{ w: 'بينقص', at: 29.37 }, { w: 'لحالو', at: 29.8 }, { w: 'مع', at: 30.2 }, { w: 'كل', at: 30.4 }, { w: 'بيعة', at: 30.55 }], [{ w: 'بينبّهك', at: 31.05 }, { w: 'قبل', at: 31.65 }, { w: 'ما', at: 31.95 }, { w: 'تخلص', at: 32.15 }], [{ w: 'PDA', at: 33.02 }, { w: 'بتجرد', at: 34.26 }, { w: 'بدقايق', at: 34.9 }]] },
-  { ic: 'truck', time: '15:00', from: 36.0, to: 39.75, kick: [{ w: 'في', at: 36.08 }, { w: 'بضاعة', at: 36.3 }, { w: 'لازم', at: 36.65 }, { w: 'توصل؟', at: 36.9 }], title: 'التوصيل', titleAt: 37.1, lines: [[{ w: 'تابع', at: 37.45 }, { w: 'الشحنات', at: 37.85 }], [{ w: 'والتسليم', at: 38.45 }], [{ w: 'من', at: 38.95 }, { w: 'نفس', at: 39.1 }, { w: 'الشاشة', at: 39.25 }]] },
-  { ic: 'users', time: '18:00', from: 39.75, to: 44.45, kick: [{ w: 'وحساب', at: 39.85 }, { w: 'كل', at: 40.3 }, { w: 'زبون', at: 40.55 }, { w: 'ومورّد؟', at: 40.95 }], title: 'الحسابات', titleAt: 41.3, lines: [[{ w: 'واضح', at: 41.61 }], [{ w: 'مين', at: 42.19 }, { w: 'دفع', at: 42.45 }], [{ w: 'ومين', at: 42.91 }, { w: 'باقي', at: 43.2 }, { w: 'عليه', at: 43.45 }], [{ w: 'وكم', at: 43.95 }]] },
-  { ic: 'chart', time: '22:00', from: 44.45, to: 50.95, kick: [{ w: 'وآخر', at: 44.59 }, { w: 'اليوم؟', at: 44.95 }], title: 'المحاسبة', titleAt: 45.3, lines: [[{ w: 'المحاسبة', at: 45.61 }, { w: 'جاهزة', at: 46.2 }], [{ w: 'المبيعات', at: 46.84 }], [{ w: 'المصاريف', at: 47.6 }], [{ w: 'والربح', at: 48.88 }], [{ w: 'بضغطة', at: 50.0 }, { w: 'وحدة', at: 50.35 }]] },
+  { ic: 'cart', time: '08:00', from: 14.8, to: 21.25, kick: [{ w: 'الصبح؟', at: 14.99 }], title: 'الشراء', titleAt: 15.2, lines: [[{ w: 'اطلب', at: 16.95 }, { w: 'من', at: 17.25 }, { w: 'المورّد', at: 17.48 }, { w: 'بضغطة', at: 17.85 }], [{ w: 'أمر', at: 18.56 }, { w: 'الشراء', at: 19.0 }, { w: 'جاهز', at: 19.35 }], [{ w: 'كل', at: 19.87 }, { w: 'طلب', at: 20.3 }, { w: 'محفوظ', at: 20.55 }]] },
+  { ic: 'receipt', time: '10:00', from: 21.25, to: 28.45, kick: [{ w: 'الزبون', at: 21.41 }, { w: 'وصل؟', at: 21.8 }], title: 'الكاشير', titleAt: 21.7, lines: [[{ w: 'اختار', at: 22.41 }, { w: 'المنتج', at: 22.7 }], [{ w: 'امسح', at: 23.47 }, { w: 'الباركود', at: 23.85 }], [{ w: 'استلم', at: 24.56 }, { w: 'الدفعة', at: 25.05 }], [{ w: 'الفاتورة', at: 25.56 }, { w: 'جاهزة', at: 26.2 }], [{ w: 'TSE', at: 27.3 }, { w: 'مدمج', at: 27.99 }]] },
+  { ic: 'box', time: '12:00', from: 28.45, to: 36.0, kick: [{ w: 'والمخزون؟', at: 28.56 }], title: 'المخزون', titleAt: 28.9, lines: [[{ w: 'بينقص', at: 29.37 }, { w: 'لحالو', at: 29.8 }, { w: 'مع', at: 30.2 }, { w: 'كل', at: 30.4 }, { w: 'بيعة', at: 30.55 }], [{ w: 'بينبّهك', at: 31.05 }, { w: 'قبل', at: 31.66 }, { w: 'ما', at: 31.8 }, { w: 'تخلص', at: 32.05 }], [{ w: 'PDA', at: 33.57 }, { w: 'بتجرد', at: 34.26 }, { w: 'بدقايق', at: 34.99 }]] },
+  { ic: 'truck', time: '15:00', from: 36.0, to: 39.75, kick: [{ w: 'في', at: 36.08 }, { w: 'بضاعة', at: 36.3 }, { w: 'لازم', at: 36.65 }, { w: 'توصل؟', at: 36.9 }], title: 'التوصيل', titleAt: 37.1, lines: [[{ w: 'تابع', at: 37.45 }, { w: 'الشحنات', at: 37.85 }], [{ w: 'والتسليم', at: 38.31 }], [{ w: 'من', at: 38.9 }, { w: 'نفس', at: 39.0 }, { w: 'الشاشة', at: 39.12 }]] },
+  { ic: 'users', time: '18:00', from: 39.75, to: 44.45, kick: [{ w: 'وحساب', at: 39.85 }, { w: 'كل', at: 40.3 }, { w: 'زبون', at: 40.6 }, { w: 'ومورّد؟', at: 40.85 }], title: 'الحسابات', titleAt: 41.3, lines: [[{ w: 'واضح', at: 41.61 }], [{ w: 'مين', at: 42.19 }, { w: 'دفع', at: 42.45 }], [{ w: 'ومين', at: 42.91 }, { w: 'باقي', at: 43.2 }, { w: 'عليه', at: 43.45 }], [{ w: 'وكم', at: 43.95 }]] },
+  { ic: 'chart', time: '22:00', from: 44.45, to: 50.95, kick: [{ w: 'وآخر', at: 44.59 }, { w: 'اليوم؟', at: 44.95 }], title: 'المحاسبة', titleAt: 45.3, lines: [[{ w: 'المحاسبة', at: 45.61 }, { w: 'جاهزة', at: 46.2 }], [{ w: 'المبيعات', at: 46.84 }], [{ w: 'المصاريف', at: 47.61 }], [{ w: 'والربح', at: 48.25 }], [{ w: 'بضغطة', at: 48.88 }, { w: 'وحدة', at: 50.01 }]] },
 ];
 
 // Fenster-Inhalte je Modul
@@ -128,7 +128,7 @@ const VIS = [
       const lt = t - B0; inner.style.transform = `rotateX(6deg) rotateY(${lerp(14, 8, seg(lt, 0, 3, E.out))}deg) translateY(${Math.sin(lt * 1.6) * 6}px)`;
       pos.update(lt, CFG);
       const sc = seg(t, 23.5, 23.75, E.out5), so = 1 - seg(t, 24.05, 24.2, E.lin); scanCard.style.opacity = String(t > 23.45 ? sc * so : 0); scanCard.style.transform = `translateY(${(1 - sc) * 40}px) scale(${0.92 + 0.08 * sc})`; laser.style.top = `${10 + (((t - 23.75) / 0.4) % 1) * 150}px`;
-      xf(tse, { s: pop(t, 26.9, 11, 6.5), o: t >= 26.9 ? 1 : 0 });
+      xf(tse, { s: pop(t, 27.35, 11, 6.5), o: t >= 27.35 ? 1 : 0 });
     } };
   },
   // --- Lager ---
@@ -188,13 +188,13 @@ const VIS = [
   // --- Buchhaltung ---
   (par) => {
     const w = win('Buchhaltung · Tagesabschluss', 860, 700); abs(w, 100, 150); const b = w.body;
-    const BARS = [['Einnahmen', 1840, GREEN, 46.84], ['Ausgaben', 600, RED, 47.6], ['Gewinn', 1240, GOLD, 48.88]];
+    const BARS = [['Einnahmen', 1840, GREEN, 46.84], ['Ausgaben', 600, RED, 47.61], ['Gewinn', 1240, GOLD, 48.25]];
     const els = BARS.map(([n, v, c, at], i) => { const x = 60 + i * 262; const bar = h('div', { style: { position: 'absolute', left: px(x), top: '420px', width: '200px', height: '0px', borderRadius: '20px 20px 0 0', background: c } }); const val = txt(eur(0), { left: px(x - 20), top: '40px', width: '240px', textAlign: 'center', fontSize: '36px', fontWeight: 700, color: INK }); const lbl = txt(n, { left: px(x), top: '432px', width: '200px', textAlign: 'center', fontSize: '28px', fontWeight: 600, color: '#6a7390' }); b.append(bar, val, lbl); return { bar, val, v, at }; });
     const btn = h('div', { style: { position: 'absolute', left: '230px', top: '505px', width: '400px', height: '84px', borderRadius: '22px', background: RED, color: '#fff', display: 'grid', placeItems: 'center', fontWeight: 700, fontSize: '32px' } }, 'Tagesabschluss'); b.append(btn);
     par.append(w);
     return { el: w, update: (t) => {
       els.forEach(({ bar, val, v, at }) => { const k = seg(t, at, at + 0.9, E.out5); const hh = (v / 1840) * 330 * k; bar.style.height = `${hh}px`; bar.style.top = `${420 - hh}px`; val.textContent = eur(v * k); val.style.top = `${420 - hh - 56}px`; val.style.opacity = t >= at ? '1' : '0'; });
-      press(btn, t, 50.0, 'Tagesabschluss', 'Abgeschlossen ✓');
+      press(btn, t, 49.35, 'Tagesabschluss', 'Abgeschlossen ✓');
     } };
   },
 ];
@@ -223,12 +223,12 @@ const CHIPS = [['cart', '08:00'], ['receipt', '10:00'], ['box', '12:00'], ['truc
 mk(7.25, 14.85, 'transparent', (cam) => {
   const logo = img('../img/company-dark.png', 1120, { left: '400px', top: '235px' });
   const ring = h('div', { style: { position: 'absolute', left: '660px', top: '90px', width: '600px', height: '600px', borderRadius: '50%', border: '6px solid rgba(255,255,255,.25)' } });
-  const nm = rline([{ w: 'مع', at: 7.19 }, { w: 'مجموعة', at: 7.45 }, { w: 'دماس', at: 7.85 }, { w: 'للحلول', at: 8.35 }, { w: 'التقنية', at: 8.8, cls: 'gold' }], { size: 104, color: '#fff', width: 1700, font: 'ar', gap: 0.25 }); abs(nm, 110, 620);
-  const one = rline([{ w: 'كل', at: 9.5 }, { w: 'شي', at: 9.75 }, { w: 'بنظام', at: 10.0 }, { w: 'واحد!', at: 10.45, cls: 'gold' }], { size: 210, color: '#fff', width: 1700, gap: 0.22 }); abs(one, 110, 150);
-  const day = rline([{ w: 'من', at: 11.13 }, { w: 'الصبح', at: 11.3 }, { w: 'لآخر', at: 11.85 }, { w: 'الليل…', at: 12.1, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(day, 110, 130);
+  const nm = rline([{ w: 'مع', at: 7.19 }, { w: 'مجموعة', at: 7.4 }, { w: 'دماس', at: 7.88 }, { w: 'للحلول', at: 8.2 }, { w: 'التقنية', at: 8.7, cls: 'gold' }], { size: 104, color: '#fff', width: 1700, font: 'ar', gap: 0.25 }); abs(nm, 110, 620);
+  const one = rline([{ w: 'كل', at: 9.5 }, { w: 'شي', at: 9.7 }, { w: 'بنظام', at: 9.95 }, { w: 'واحد!', at: 10.4, cls: 'gold' }], { size: 210, color: '#fff', width: 1700, gap: 0.22 }); abs(one, 110, 150);
+  const day = rline([{ w: 'من', at: 11.13 }, { w: 'الصبح', at: 11.35 }, { w: 'لآخر', at: 11.75 }, { w: 'الليل…', at: 12.05, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(day, 110, 130);
   const path = h('div', { style: { position: 'absolute', left: '420px', top: '470px', width: '1080px', height: '0', borderTop: '6px dashed rgba(255,255,255,.28)' } });
   const sun = h('div', { style: { position: 'absolute', left: '0', top: '0', width: '110px', height: '110px' } }, li('sun', 110, GOLD, 5)); const moon = h('div', { style: { position: 'absolute', left: '0', top: '0', width: '110px', height: '110px' } }, li('moon', 110, '#cfe0ff', 5));
-  const all = rline([{ w: 'نظام', at: 12.69 }, { w: 'واحد', at: 13.0, cls: 'gold' }, { w: 'بيدير', at: 13.4 }, { w: 'محلك', at: 13.9 }, { w: 'كلو', at: 14.3, cls: 'gold' }], { size: 112, color: '#fff', width: 1700, gap: 0.24 }); abs(all, 110, 770);
+  const all = rline([{ w: 'نظام', at: 12.69 }, { w: 'واحد', at: 13.05, cls: 'gold' }, { w: 'بيدير', at: 13.5 }, { w: 'محلك', at: 13.9 }, { w: 'كلو', at: 14.3, cls: 'gold' }], { size: 112, color: '#fff', width: 1700, gap: 0.24 }); abs(all, 110, 770);
   cam.append(ring, logo, nm, one, day, path, sun, moon, all);
   return { logo, ring, nm, one, day, path, sun, moon, all };
 }, (lt, s, cam, t) => {
@@ -285,7 +285,7 @@ const updateHud = (t) => {
 };
 
 // ================= 3 Schluss: «مبيعات أسرع… حسابات أدق… وإدارة أوضح» (50.95 – 54.4) =================
-const TRIO = [['bolt', 'مبيعات', 'أسرع', 51.0, 51.45], ['chart', 'حسابات', 'أدق', 52.0, 52.45], ['eye', 'إدارة', 'أوضح', 53.21, 53.75]];
+const TRIO = [['bolt', 'مبيعات', 'أسرع', 51.0, 51.43], ['chart', 'حسابات', 'أدق', 51.92, 52.45], ['eye', 'إدارة', 'أوضح', 53.21, 53.6]];
 mk(50.95, 54.4, `linear-gradient(180deg, #FF6A60 0%, ${RED} 45%, #C21F28 100%)`, (cam) => {
   const rays = h('div', { style: { position: 'absolute', left: '-300px', top: '-1000px', width: '2520px', height: '2520px', borderRadius: '50%', background: 'repeating-conic-gradient(rgba(255,255,255,.12) 0deg 8deg, rgba(255,255,255,0) 8deg 24deg)', maskImage: 'radial-gradient(closest-side, #000 15%, transparent 78%)', WebkitMaskImage: 'radial-gradient(closest-side, #000 15%, transparent 78%)' } });
   cam.append(rays);
@@ -305,10 +305,10 @@ mk(50.95, 54.4, `linear-gradient(180deg, #FF6A60 0%, ${RED} 45%, #C21F28 100%)`,
 // ================= 4 Zusammensetzen: «كل قطعة بمكانها… ونظام واحد لكل شغلك» (54.4 – 58.8) =================
 mk(54.4, 58.8, `radial-gradient(1100px 900px at 50% 55%, #1d3a6b 0%, ${NAVY} 72%)`, (cam) => {
   cam.append(grid(0.04));
-  const a = rline([{ w: 'كل', at: 54.52 }, { w: 'قطعة', at: 54.9 }, { w: 'بمكانها', at: 55.4, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(a, 110, 60);
+  const a = rline([{ w: 'كل', at: 54.52 }, { w: 'قطعة', at: 54.8 }, { w: 'بمكانها', at: 55.22, cls: 'gold' }], { size: 150, color: '#fff', width: 1700, gap: 0.22 }); abs(a, 110, 60);
   const pieces = CHIPS.map(([ic], i) => { const el = h('div', { style: { position: 'absolute', left: '0', top: '0', width: '200px', height: '200px', borderRadius: '44px', background: [RED, '#1d3a6b', RED, '#1d3a6b', RED, '#1d3a6b'][i], border: '4px solid rgba(255,255,255,.22)', display: 'grid', placeItems: 'center', boxShadow: '0 30px 60px rgba(0,0,0,.4)' } }, li(ic, 110, '#fff', 5)); cam.append(el); return el; });
   const mark = img('../img/mark-dark.png', 480, { left: '720px', top: '290px', filter: 'drop-shadow(0 0 70px rgba(244,52,58,.55))' });
-  const b = rline([{ w: 'ونظام', at: 56.54 }, { w: 'واحد', at: 57.0, cls: 'gold' }, { w: 'لكل', at: 57.6 }, { w: 'شغلك', at: 58.0 }], { size: 140, color: '#fff', width: 1700, gap: 0.22 }); abs(b, 110, 800);
+  const b = rline([{ w: 'ونظام', at: 56.54 }, { w: 'واحد', at: 57.2, cls: 'gold' }, { w: 'لكل', at: 57.8 }, { w: 'شغلك', at: 58.2 }], { size: 140, color: '#fff', width: 1700, gap: 0.22 }); abs(b, 110, 800);
   const burst = makeBurst(cam, { x: 960, y: 520, n: 50, seed: 7 });
   cam.append(a, mark, b);
   return { a, pieces, mark, b, burst };
@@ -330,8 +330,8 @@ mk(58.8, 64.4, `linear-gradient(180deg, #10264a 0%, ${NAVY} 60%, #3a0d14 100%)`,
   cam.append(glow('rgba(244,52,58,A)', 960, 1250, 1700, 520, 0.22), grid(0.04));
   const app = img('../img/mark-dark.png', 500, { left: '220px', top: '90px', filter: 'drop-shadow(0 30px 50px rgba(0,0,0,.5)) drop-shadow(0 0 60px rgba(244,52,58,.45))' });
   const logo = img('../img/company-dark.png', 700, { left: '120px', top: '690px' });
-  const a = rline([{ w: 'جرّب', at: 58.91 }, { w: 'النسخة', at: 59.3 }, { w: 'التجريبية', at: 59.75, cls: 'gold' }], { size: 124, color: '#fff', width: 860, align: 'flex-start', gap: 0.2 }); abs(a, 1000, 130);
-  const nm = rline([{ w: 'من', at: 60.35 }, { w: 'مجموعة', at: 60.6 }, { w: 'دماس', at: 61.05 }, { w: 'للحلول', at: 61.5 }, { w: 'التقنية', at: 61.9, cls: 'gold' }], { size: 66, color: '#fff', width: 860, align: 'flex-start', font: 'ar', gap: 0.25 }); abs(nm, 1000, 470);
+  const a = rline([{ w: 'جرّب', at: 58.91 }, { w: 'النسخة', at: 59.2 }, { w: 'التجريبية', at: 59.68, cls: 'gold' }], { size: 124, color: '#fff', width: 860, align: 'flex-start', gap: 0.2 }); abs(a, 1000, 130);
+  const nm = rline([{ w: 'من', at: 60.29 }, { w: 'مجموعة', at: 60.41 }, { w: 'دماس', at: 60.78 }, { w: 'للحلول', at: 61.02 }, { w: 'التقنية', at: 61.42, cls: 'gold' }], { size: 66, color: '#fff', width: 860, align: 'flex-start', font: 'ar', gap: 0.25 }); abs(nm, 1000, 470);
   const cta = h('div', { style: { position: 'absolute', left: '1080px', top: '690px', width: '720px', height: '160px', borderRadius: '80px', background: RED, boxShadow: '0 20px 0 #9a1219, 0 50px 90px rgba(244,52,58,.5)', display: 'grid', placeItems: 'center', overflow: 'hidden' } });
   const ct = rline([{ w: 'واطلبها', at: 62.47 }, { w: 'اليوم!', at: 62.9 }], { size: 78, color: '#fff', width: 640, font: 'ar', gap: 0.24 }); ct.style.position = 'relative'; cta.append(ct);
   const url = h('div', { class: 'lat', style: { position: 'absolute', left: '1190px', top: '900px', width: '500px', height: '84px', borderRadius: '42px', background: 'rgba(255,255,255,.1)', border: '3px solid rgba(255,255,255,.3)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', fontSize: '33px', fontWeight: 700 } }, li('globe', 46, '#fff', 5), 'd-group-it-solutions.de');
@@ -364,12 +364,12 @@ window.SFX = [
   [0.08, 'pop'], [0.94, 'pop'], [1.75, 'pop'], [2.69, 'pop'], [3.46, 'pop'], [4.35, 'pop'], [5.0, 'pop'], [6.4, 'tick'], [6.85, 'riser'], [7.0, 'whoosh'], [7.3, 'boom'],
   [7.45, 'pop'], [7.85, 'pop'], [8.35, 'pop'], [8.8, 'ding'], [9.5, 'pop'], [10.45, 'pop'], [9.6, 'tick'], [9.72, 'tick'], [9.84, 'tick'], [9.96, 'tick'], [10.08, 'tick'], [10.2, 'tick'], [11.13, 'whoosh'], [12.3, 'pop'], [12.69, 'pop'], [13.3, 'whoosh'], [14.35, 'ding'], [14.7, 'whoosh'],
   [15.2, 'pop'], [16.0, 'tick'], [16.4, 'tick'], [16.8, 'tick'], [17.95, 'click'], [18.7, 'ding'], [20.0, 'pop'], [21.2, 'whoosh'], [21.7, 'pop'],
-  [22.85, 'click'], [23.55, 'beep'], [24.0, 'click'], [24.95, 'click'], [25.2, 'kaching'], [25.75, 'print'], [26.9, 'ding'], [28.35, 'whoosh'], [28.9, 'pop'],
+  [22.85, 'click'], [23.55, 'beep'], [24.0, 'click'], [24.95, 'click'], [25.2, 'kaching'], [25.75, 'print'], [27.35, 'ding'], [28.35, 'whoosh'], [28.9, 'pop'],
   [29.4, 'tick'], [29.8, 'tick'], [30.2, 'tick'], [30.6, 'tick'], [31.05, 'beep'], [31.1, 'pop'], [33.1, 'whoosh'], [34.3, 'tick'], [34.6, 'tick'], [34.9, 'tick'], [35.5, 'ding'], [35.9, 'whoosh'], [37.1, 'pop'], [36.7, 'tick'], [39.3, 'ding'], [39.65, 'whoosh'],
-  [40.0, 'tick'], [40.4, 'tick'], [40.8, 'tick'], [41.3, 'pop'], [42.19, 'ding'], [42.91, 'beep'], [43.95, 'pop'], [44.35, 'whoosh'], [45.3, 'pop'], [46.84, 'pop'], [47.6, 'pop'], [48.88, 'ding'], [50.0, 'click'], [50.2, 'kaching'],
+  [40.0, 'tick'], [40.4, 'tick'], [40.8, 'tick'], [41.3, 'pop'], [42.19, 'ding'], [42.91, 'beep'], [43.95, 'pop'], [44.35, 'whoosh'], [45.3, 'pop'], [46.84, 'pop'], [47.6, 'pop'], [48.25, 'ding'], [49.35, 'click'], [50.0, 'kaching'],
   [50.9, 'whoosh'], [51.0, 'boom'], [51.45, 'pop'], [52.0, 'pop'], [52.45, 'pop'], [53.21, 'pop'], [53.75, 'pop'], [54.3, 'whoosh'],
   [54.52, 'pop'], [54.65, 'pop'], [54.78, 'pop'], [54.91, 'pop'], [55.04, 'pop'], [55.17, 'pop'], [56.45, 'riser'], [56.7, 'boom'], [56.9, 'ding'], [58.7, 'whoosh'],
-  [58.9, 'pop'], [59.75, 'pop'], [61.9, 'ding'], [62.35, 'pop'], [62.6, 'whoosh'], [63.1, 'click'],
+  [58.9, 'pop'], [59.68, 'pop'], [61.42, 'ding'], [62.35, 'pop'], [62.6, 'whoosh'], [63.1, 'click'],
 ];
 
 window.render = (t) => {
